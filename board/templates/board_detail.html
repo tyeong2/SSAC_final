@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="title">제목</label>
+                <!--input
+                        type="text"
+                        class="form-conrtrol"
+                        id="title"
+                        value="{{ board.title }}"
+                        readonly
+                / -->
+                <textarea class="form-control" readonly>{{ board.title }}</textarea>
+                <label for="contents">내용</label>
+                <textarea class="form-control" readonly>{{ board.contents }}</textarea>
+                <label for="image">디자인</label><br>
+                {% if board.image %}
+                <img src="{{ board.image.url }}" alt="{{ board.image }}" onerror="this.style.display='none';" readonly/>
+                {% endif %}
+            </div>
+            {% if board.writer %}
+            <button class="btn btn-primary" onclick="location.href='/board/detail/{{ board.id }}/update/'">수정하기</button>
+            <a class="btn btn-primary" href="/board/detail/{{ board.id }}/delete/" onclick="return confirm('Are you sure you want to delete this?')"
+            >삭제하기</a>
+            {% endif %}
+            <button class="btn btn-primary" onclick="location.href='/board/list/'">목록으로</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

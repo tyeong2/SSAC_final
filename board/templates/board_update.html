@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_title">게시글 제목</label>
+                    <input type="text" class="form-control" id="id_title" placeholder="게시글 제목" name="title" value="{{ form.title.value }}"/>
+                </div>
+                <div class="form-group">
+                    <label for="id_contents">게시글 내용</label>
+                    <textarea class="form-control" name="contents" placeholder="게시글 내용">{{ form.contents.value }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id_image">첨부 이미지</label>
+                    <input type="file" class="form-control" id="id_image" placeholder="첨부 이미지" name="image" value="{{ form.image.url }}"/>
+                </div>
+                <button type="submit" class="btn btn-primary">수정하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

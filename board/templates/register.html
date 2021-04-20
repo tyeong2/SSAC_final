@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <h1>회원가입</h1>
+        </div>
+          <div class="row mt-5">
+              <div class="col-12">
+                  {{error}}
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-12 text-left">
+           <form method="POST" action="">
+               {% csrf_token %}
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="email" name="email" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="password" name="password">
+              </div>
+               <div class="form-group">
+                <label for="password-check">Confirm Password</label>
+                <input type="password" class="form-control" id="password-check" placeholder="password-check" name="password-check">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

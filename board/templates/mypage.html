@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <textarea class="form-control" readonly>{{ member.user_email }}</textarea>
+                <label for="created_at">가입일</label>
+                <textarea class="form-control" readonly>{{ member.user_created }}</textarea>
+                <label for="updated_at">수정일</label>
+                <textarea class="form-control" readonly>{{ member.user_updated }}</textarea>
+                <!-- 유저 저장 이미지 영역 -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
