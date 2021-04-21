@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="no-js" lang="kor">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Show Car</title>
+        <meta name="description" content="Design car">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../Static/css/style.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <!-- PRELOADER -->
+        <div id="preloader">
+            <div class="preloader-area">
+            	<div class="preloader-box">
+            		<div class="preloader"></div>
+            	</div>
+            </div>
+        </div>
+
+        <header class="header-section">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                    	<a class="navbar-brand" href="index.html"><b>H</b>ome</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right cart-menu">
+                            <li><a href="aboutus.html">About Us</a></li>
+                            <li><a href="guide.html">Guide</a></li>
+                            <li><a href="design.html">Design</a></li>
+                            <li><a href="community.html">Community</a></li>
+                            <li><a href="login.html">Login</a></li>
+                            <ul class="nav navbar-nav navbar-right cart-menu">
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                  <img src="../Static/img/user.jpg" width="25" height="25" alt="">
+                                  <span class="caret"></span></a>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="">회원정보관리</a></li>
+                                    <li><a href="">Logout</a></li>
+                                  </ul>
+                                </li>
+                            </ul>
+                          </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container -->
+            </nav>
+        </header>
+
+        <section class="review-section">
+          <div class="container">
+              <div class="row mt-5">
+                  <div class="col-12">
+                      <form method="POST" action="" enctype="multipart/form-data">
+                          <div class="form-group">
+                              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                              <textarea
+                                  class="form-conrtrol"
+                                  name="{{ field.name }}"
+                                  placeholder="{{ field.label }}">
+                                </textarea>
+                              <input
+                                      type="{{ field.field.widget.input_type }}"
+                                      class="form-conrtrol"
+                                      id="{{ field.id_for_label }}"
+                                      placeholder="{{ field.label }}"
+                                      name="{{ field.name }}"
+                              />
+                          </div>
+                          <span style="color: red;">{{ field.errors }}</span>
+                          <button type="submit" class="btn btn-primary">글쓰기</button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="social-media">
+                      <ul>
+                        <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                      </ul>
+                    </div>
+                      <p class="center">Copyright 오파닭 All rights reserved. Developed by <i class="fa fa-love"></i><a href="https://ssac.seoul.kr/main/index.jsp">SSAC</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JQUERY -->
+        <script src="../Static/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="../Static/js/vendor/bootstrap.min.js"></script>
+        <script src="../Static/js/isotope.pkgd.min.js"></script>
+        <script src="../Static/js/owl.carousel.min.js"></script>
+        <script src="../Static/js/wow.min.js"></script>
+        <script src="../Static/js/custom.js"></script>
+    </body>
+</html>
