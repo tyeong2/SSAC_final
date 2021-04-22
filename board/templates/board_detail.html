@@ -27,6 +27,31 @@
             >삭제하기</a>
             {% endif %}
             <button class="btn btn-primary" onclick="location.href='/board/list/'">목록으로</button>
+            {% if board.comment_set.count > 0 %}
+            <div class="mt-3">
+            {% for comment in board.comment_set.all %}
+                <div class="comment py-2 text-muted">
+                    <span style="white-space: pre-line;">{{ comment.content }}</span>
+                    <span>
+                        - {{ comment.author }}, {{ comment.create_date }}
+                        {% if comment.modify_date %}
+                        (수정:{{ comment.modify_date }})
+                        {% endif %}
+                    </span>
+
+
+                    <a href="{% url 'comment_modify_board' comment.id  %}" class="small">수정</a>,
+                    <a href="{% url 'comment_delete_board' comment.id  %}" class="small">삭제2</a>
+
+
+                </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+            <div>
+                <a href="{% url 'comment_create_board' board.id  %}"
+                   class="small"><small>댓글 추가 ..</small></a>
+            </div>
         </div>
     </div>
 </div>
