@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Member, Board, Cars
+from .models import Member, Board, Cars, Comment
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
-from .forms import LoginForm, BoardForm, BoardUpdate
+from .forms import LoginForm, BoardForm, BoardUpdate, CommentForm
 from django.http import Http404
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -231,3 +231,59 @@ def board_delete(request, pk):
     board = Board.objects.get(pk=pk)
     board.delete()
     return redirect('/board/list/')
+
+def comment_create_board(request, board_id):
+    board = get_object_or_404(Board, pk=board_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            user_id = request.session.get('user')
+            comment.author = Member.objects.get(pk=user_id)
+            comment.board = board
+            comment.save()
+            return redirect('/board/detail/'+str(board_id))
+    else:
+        form = CommentForm()
+    context = {'form': form}
+    return render(request, 'comment_form.html', context)
+
+
+def comment_modify_board(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    user_id = request.session.get('user')
+    x_man = Member.objects.get(pk=user_id)
+
+    if x_man != comment.author:
+        messages.error(request, '댓글수정권한이 없습니다')
+        return redirect('/board/detail/'+str(comment.board.id))
+
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            user_id = request.session.get('user')
+            comment.author = Member.objects.get(pk=user_id)
+            comment.save()
+            return redirect('/board/detail/'+str(comment.board.id))
+    else:
+        form = CommentForm(instance=comment)
+    context = {'form': form}
+    return render(request, 'comment_form.html', context)
+
+def comment_delete_board(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    user_id = request.session.get('user')
+    x_man = Member.objects.get(pk=user_id)
+
+    if x_man != comment.author:
+        messages.error(request, '댓글삭제권한이 없습니다')
+        print(x_man,'     ',comment.author)
+        return redirect('/board/detail/'+str(comment.board.id))
+    else:
+        print('getetetetet')
+        comment.delete()
+    return redirect('/board/detail/'+str(comment.board.id))
