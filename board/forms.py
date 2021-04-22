@@ -54,6 +54,11 @@ class BoardUpdate(forms.ModelForm):
         model = Board
         fields = ['title', 'contents', 'image']
         
+class MemberUpdate(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['user_nickname']
+        
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
