@@ -4,10 +4,10 @@ from .models import Member, Board
 # Register your models here.
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ('user_email', 'user_pw', 'user_created', 'user_updated')
+    list_display = ('user_email', 'user_nickname', 'user_pw', 'user_created', 'user_updated')
 
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ('title', 'writer', 'created_at', 'updated_at', 'image')
+    list_display = ('title', 'writer', 'created_at', 'updated_at', 'image', 'hit')
 
 admin.site.register(Member, MemberAdmin)
 admin.site.register(Board, BoardAdmin)
