@@ -2,16 +2,28 @@
 
 {% block content %}
 <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="titie-section wow fadeInDown animated ">
+                <h1>회원정보</h1>
+            </div>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-12">
             <div class="form-group">
-                <label for="email">이메일</label>
+                <label for="email">사용자 이메일</label>
                 <textarea class="form-control" readonly>{{ member.user_email }}</textarea>
-                <label for="created_at">가입일</label>
+                <label for="nickname">사용자 닉네임</label>
+                <textarea class="form-control" readonly>{{ member.user_nickname }}</textarea>
+                <label for="created_at">최초가입일</label>
                 <textarea class="form-control" readonly>{{ member.user_created }}</textarea>
-                <label for="updated_at">수정일</label>
+                <label for="updated_at">정보수정일</label>
                 <textarea class="form-control" readonly>{{ member.user_updated }}</textarea>
                 <!-- 유저 저장 이미지 영역 -->
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" onclick="location.href='/board/mypage/update/'">정보 수정</button>
             </div>
         </div>
     </div>
