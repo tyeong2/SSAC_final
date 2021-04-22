@@ -2,98 +2,102 @@
 
 {% block content %}
 <section class="review-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="titie-section wow fadeInDown animated ">
-                    <h1>Design</h1>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div id="feedback" class="carousel slide feedback" data-ride="feedback">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </div>
-                    </div>
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators review-controlar">
-                        <li data-target="#feedback" data-slide-to="0" class="active">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </li>
-                        <li data-target="#feedback" data-slide-to="1">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </li>
-                        <li data-target="#feedback" data-slide-to="2">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </li>
-                        <li data-target="#feedback" data-slide-to="3">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </li>
-                        <li data-target="#feedback" data-slide-to="4">
-                            <img src="/static/img/sample.png" width="512" height="512" alt="">
-                        </li>
-                    </ol>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#feedback" role="button" data-slide="prev">
-                        <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
-                    </a>
-                    <a class="right carousel-control" href="#feedback" role="button" data-slide="next">
-                        <span class="pe-7s-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
-                    </a>
-                </div>
-            </div>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div class="col-sm-4">
-                    <h3>Vehicle type</h3>
-                    <input type="checkbox" id="Hatchback" name="type" value="Hatchback">
-                    <label for="Hatchback">Hatchback</label>
-                    <input type="checkbox" id="Sedan" name="type" value="Sedan">
-                    <label for="Sedan">Sedan</label>
-                    <input type="checkbox" id="Sports car" name="type" value="Sports car">
-                    <label for="Sports car">Sports car</label>
-                    <input type="checkbox" id="SUV" name="type" value="SUV">
-                    <label for="SUV">SUV</label>
-                    <h3>Brands</h3>
-                    <input type="checkbox" id="AUDI" name="Brands" value="AUDI">
-                    <label for="AUDI">AUDI</label>
-                    <input type="checkbox" id="Bentley" name="Brands" value="Bentley">
-                    <label for="Bentley">Bentley</label>
-                    <input type="checkbox" id="Benz" name="Brands" value="Benz">
-                    <label for="Benz">Benz</label>
-                    <input type="checkbox" id="BMW" name="Brands" value="BMW">
-                    <label for="BMW">BMW</label>
-                    <input type="checkbox" id="Chrysler" name="Brands" value="Chrysler">
-                    <label for="Chrysler">Chrysler</label>
-                    <input type="checkbox" id="Ferrari" name="Brands" value="Ferrari">
-                    <label for="Ferrari">Ferrari</label>
-                    <input type="checkbox" id="Hyundai" name="Brands" value="Hyundai">
-                    <label for="Hyundai">Hyundai</label>
-                    <input type="checkbox" id="Kia" name="Brands" value="Kia">
-                    <label for="Kia">Kia</label>
-                    <input type="checkbox" id="Porsche" name="Brands" value="Porsche">
-                    <label for="Porsche">Porsche</label>
-                    <input type="checkbox" id="Volkswagen" name="Brands" value="Volkswagen">
-                    <label for="Volkswagen">Volkswagen</label>
-                    <input type="submit" value="전송하기">
-                </div>
-            </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="titie-section wow fadeInDown animated ">
+          <h1>Design</h1>
         </div>
+      </div>
+      <div class="col-sm-8">
+        <div id="feedback" class="carousel slide feedback" data-ride="feedback">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </div>
+            <div class="item">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </div>
+            <div class="item">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </div>
+            <div class="item">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </div>
+            <div class="item">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </div>
+          </div>
+          <!-- Indicators -->
+          <ol class="carousel-indicators review-controlar">
+            <li data-target="#feedback" data-slide-to="0" class="active">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </li>
+            <li data-target="#feedback" data-slide-to="1">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </li>
+            <li data-target="#feedback" data-slide-to="2">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </li>
+            <li data-target="#feedback" data-slide-to="3">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </li>
+            <li data-target="#feedback" data-slide-to="4">
+              <img src="../Static/img/sample.png" width="512" height="512" alt="">
+            </li>
+          </ol>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#feedback" role="button" data-slide="prev">
+            <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
+          </a>
+          <a class="right carousel-control" href="#feedback" role="button" data-slide="next">
+            <span class="pe-7s-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="col-sm-4">
+          <h3>Vehicle type</h3>
+          <input type="checkbox" id="Hatchback" name="type" value="Hatchback" checked>
+          <label for="Hatchback">Hatchback</label>
+          <input type="checkbox" id="Sedan" name="type" value="Sedan" checked>
+          <label for="Sedan">Sedan</label>
+          <input type="checkbox" id="Sports car" name="type" value="Sports car">
+          <label for="Sports car">Sports car</label>
+          <input type="checkbox" id="SUV" name="type" value="SUV">
+          <label for="SUV">SUV</label>
+          <h3>Brands</h3>
+          <input type="checkbox" id="AUDI" name="Brands" value="AUDI" checked>
+          <label for="AUDI">AUDI</label>
+          <input type="checkbox" id="Bentley" name="Brands" value="Bentley" checked>
+          <label for="Bentley">Bentley</label>
+          <input type="checkbox" id="Benz" name="Brands" value="Benz">
+          <label for="Benz">Benz</label>
+          <input type="checkbox" id="BMW" name="Brands" value="BMW">
+          <label for="BMW">BMW</label>
+          <input type="checkbox" id="Chrysler" name="Brands" value="Chrysler">
+          <label for="Chrysler">Chrysler</label>
+          <input type="checkbox" id="Ferrari" name="Brands" value="Ferrari">
+          <label for="Ferrari">Ferrari</label>
+          <input type="checkbox" id="Hyundai" name="Brands" value="Hyundai">
+          <label for="Hyundai">Hyundai</label>
+          <input type="checkbox" id="Kia" name="Brands" value="Kia">
+          <label for="Kia">Kia</label>
+          <input type="checkbox" id="Porsche" name="Brands" value="Porsche">
+          <label for="Porsche">Porsche</label>
+          <input type="checkbox" id="Volkswagen" name="Brands" value="Volkswagen">
+          <label for="Volkswagen">Volkswagen</label>
+        </div>
+      </form>
+      <div>
+        <button class="btn btn-info">생성하기</button>
+        <button class="btn btn-info">저장하기</button>
+        <button class="btn btn-info">공유하기</button>
+      </div>
     </div>
+  </div>
 </section>
 {% endblock %}
