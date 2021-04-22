@@ -128,7 +128,7 @@ def board_list(request):
     all_boards = Board.objects.all().order_by('-id')
     page = int(request.GET.get('p', 1))
     #페이지 명을 'p'라는 변수로 받고 없다면 1페이지로
-    pagenator = Paginator(all_boards, 5) #all_boards 의 내용을 한 페이지당 오브젝트 2개씩
+    pagenator = Paginator(all_boards, 8) #all_boards 의 내용을 한 페이지당 오브젝트 8개씩
     boards = pagenator.get_page(page)
     return render(request, 'board_list.html', {'boards' : boards})
 
