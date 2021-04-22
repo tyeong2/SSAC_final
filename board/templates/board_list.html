@@ -32,7 +32,7 @@
                     </div>
                     <div class="product-hover">
                         <div class="product-meta">
-                            <a href="test1.html"><i class="pe-7s-like">123</i></a>
+                            <a href="{% url 'vote_board' board.id  %}"><i class="pe-7s-like"></i>{{board.voter.count}}</a>
                         </div>
                     </div>
                 </div>
