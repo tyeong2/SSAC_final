@@ -58,3 +58,10 @@ class Cars(models.Model):
         db_table = 'cars'
         verbose_name = '디자인데이터'
         verbose_name_plural = '디자인데이터'
+        
+class Comment(models.Model):
+    author = models.ForeignKey('board.Member', on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
+    modify_date = models.DateTimeField(null=True, blank=True)
+    board = models.ForeignKey('board.Board', on_delete=models.CASCADE)
