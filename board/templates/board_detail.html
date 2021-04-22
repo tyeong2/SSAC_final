@@ -3,6 +3,11 @@
 {% block content %}
 <div class="container">
     <div class="row mt-5">
+        <div class="col-5"> <!-- 추천영역 -->
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
+            <a href="{% url 'vote_board_detail' board.id  %}"
+               class="recommend btn btn-sm btn-secondary btn-block my-1">좋아요</a>
+        </div>
         <div class="col-12">
             <div class="form-group">
                 <label for="title">제목</label>
