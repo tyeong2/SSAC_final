@@ -15,12 +15,13 @@ def register(request):
         return render(request, 'register.html')
     elif request.method == 'POST':
         user_email = request.POST.get('email')
+        user_nickname = request.POST.get('nickname')
         user_pw = request.POST.get('password')
         user_pw_confirm = request.POST.get('password-check')
 
         res_data = {}
         #모든 값을 입력하지 않았을 때
-        if (user_email is None) or (user_pw is None) or (user_pw_confirm is None):
+        if (user_email is None) or (user_pw is None) or (user_pw_confirm is None) or (user_nickname == ''):
             res_data['error'] = '모든 값을 입력해야 합니다.'
             return render(request, 'register.html', res_data)
         #입력받은 비밀번호가 다를때
@@ -31,10 +32,15 @@ def register(request):
         elif Member.objects.filter(user_email=user_email).exists():
             res_data['error'] = '이미 등록된 이메일 주소입니다.'
             return render(request, 'register.html', res_data)
+        # 이미 등록된 닉네임일 경우
+        elif Member.objects.filter(user_nickname=user_nickname).exists():
+            res_data['error'] = '이미 등록된 닉네임 입니다.'
+            return render(request, 'register.html', res_data)
         else:
             #입력받은 사용자 정보를 객체를 만들어서 저장
             member = Member(
                 user_email = user_email,
+                user_nickname = user_nickname,
                 #비밀번호 형태로 바꾸어서 저장
                 user_pw = make_password(user_pw)
             )
