@@ -4,6 +4,7 @@ from django.db import models
 
 class Member(models.Model):
     user_email      = models.EmailField(max_length=100, verbose_name='유저 이메일')
+    user_nickname   = models.CharField(max_length=100, verbose_name='유저 닉네임')
     user_pw         = models.CharField(max_length=100, verbose_name='유저 비밀번호')
     user_created    = models.DateTimeField(auto_now_add=True, verbose_name='가입일')
     user_updated    = models.DateTimeField(auto_now=True, verbose_name='수정일')
@@ -24,6 +25,7 @@ class Board(models.Model):
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     updated_at  = models.DateTimeField(auto_now=True, verbose_name='수정일')
     image       = models.ImageField(upload_to='images/', blank=True, null=True)
+    hit         = models.PositiveIntegerField(default=0)
     # pip install django-imagekit
     # image       = ProcessedImageField(
     #     blank=True, processors=[Thumbnail(300, 300),], format='JPEG', options={'quality':90,}
@@ -31,6 +33,11 @@ class Board(models.Model):
 
     def __str__(self):
         return self.title
+    
+    @property
+    def hit_up(self):
+        self.hit = self.hit + 1
+        self.save()
 
     class Meta:
         db_table            = 'boards'
