@@ -2,124 +2,132 @@
 
 {% block content %}
 <section class="featured-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="titie-section wow fadeInDown animated ">
-                    <h1>Community</h1>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="titie-section wow fadeInDown animated">
+          <h1>Community</h1>
         </div>
-        <div class="row">
-            <div class="filter-menu">
-                <ul class="button-group sort-button-group">
-                    <li class="button active" data-category="all">All</li>
-                    <li class="button" data-category="cat-1">Hatchback</li>
-                    <li class="button" data-category="cat-2">Sedan</li>
-                    <li class="button" data-category="cat-3">Sports car</li>
-                    <li class="button" data-category="cat-4">SUV</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row featured isotope">
-        <!-- 상위권 랭킹 모아서 보여주기?
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
-                <div class="product-item">
-                    <div>
-                        <a href="test.html" class="sell-item">
-                            <img src="" class="img-responsive" width="512" height="512" alt="">
-                        </a>
-                    </div>
-                    <div class="product-hover">
-                        <div class="product-meta">
-                            <a href="{% url 'vote_board' board.id  %}"><i class="pe-7s-like"></i>{{board.voter.count}}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="best-caption">
-                    <span class="rank">1</span>
-                    <span class="text ellipsis"> </span>
-                    <span class="views">
-                        <em class="count">9619</em>명
-                    </span>
-                </div>
-            </div>
-        -->
-            {% for board in boards %} 
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
-                <div class="product-item">
-                    <img src="{{ board.image.url }}" class="img-responsive" width="512" height="512" alt="">
-                    <div class="product-hover">
-                        <div class="product-meta">
-                            <a href="#"><i class="pe-7s-like"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-title">
-                        <a href="/board/detail/{{ board.id }}/">
-                            <h3>{{ board.title }}</h3>
-                            <span>{{ board.hit }}</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %} 
-        </div>
+      </div>
     </div>
-</section>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="filter-menu">
+          <ul class="button-group sort-button-group">
+            <li class="button active" data-category="all">All</li>
+            <li class="button" data-category="cat-1">Hatchback</li>
+            <li class="button" data-category="cat-2">Sedan</li>
+            <li class="button" data-category="cat-3">Sports car</li>
+            <li class="button" data-category="cat-4">SUV</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="filter-bar">
+          <ul class="button-group sort-button-group">
+            <button type="button" class="btn btn-default">내가 쓴 글</button>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="filter-bar">
+          <ul class="nav navbar-nav navbar-right cart-menu">
+            <li class="dropdown">
+              <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">
+                ---<span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">좋아요</a></li>
+                <li><a href="#">최신</a></li>
+                <li><a href="#">조회수</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-<section class="page-section">
-    <div class="container">
+    <div class="row featured isotope">
+      <!-- isotope은 이미지가 겹치는것을 방지하는 기능이다 -->
+      {% for board in boards %}
+      <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+        <div class="product-item">
+          <img src="{{ board.image.url }}" class="img-responsive" width="512" height="512" alt="">
+          <div class="product-like">
+            <span>100명</span>
+            <a href="#"><i class="pe-7s-like"></i></a>
+          </div>
+          <div class="product-title">
+            <a href="/board/detail/{{ board.id }}/">
+              <span>{{ board.count }}</span>
+              <h3>{{ board.title }}</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="review-section">
+      <div class="row">
+        <div class="col-xs-2 col-sm2">
+          <select name="searchType" class="form-control">
+            <option value="n">-----</option>
+            <option value="t">제목</option>
+            <option value="c">내용</option>
+            <option value="w">작성자</option>
+            <option value="tc">제목+내용</option>
+          </select>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <div class="input-group">
+            <input type="text" name="keyword" id="keywordInput" value="" class=" form-control">
+            <span class="input-group-btn">
+              <button id="searchBtn" class="btn btn-default">검색</button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-section">
         <div class="row mt-2">
-            <div class="col-12">
-                <!-- 여기에 부트스트랩 페이지네이션 코드 복붙 -->
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        {% if boards.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?p={{ boards.previous_page_number }}">Previous</a>
-                        </li>
-                        {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Previous</a>
-                        </li>
-                        {% endif %}
-                        <li class="page-item">
-                            <a class="page-link" href="#">{{ boards.number }} / {{ boards.paginator.num_pages }}</a>
-                        </li>
-                        {% if boards.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?p={{ boards.next_page_number }}">Next</a>
-                        </li>
-                        {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
+          <div class="col-12">
+            <!-- 여기에 부트스트랩 페이지네이션 코드 복붙 -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                {% if boards.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?p={{ boards.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">Previous</a>
+                </li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link" href="#">{{ boards.number }} / {{ boards.paginator.num_pages }}</a>
+                </li>
+                {% if boards.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?p={{ boards.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
 
-        <div class="row">
+          <div class="row">
             <div class="col-12">
-                <button type="button" class="btn btn-primary" onclick="location.href='/board/write/'">글쓰기</button>
+              <button type="button" class="btn btn-primary" onclick="location.href='/board/write/'">글쓰기</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<section class="search-section">
-    <div class="container">
-        <div class="row subscribe-from">
-            <div class="col-md-12">
-                <form class="form-inline col-md-12 wow fadeInDown animated">
-                    <div class="form-group">
-                        <input type="email" class="form-control subscribe" id="email" placeholder="Search...">
-                        <button class="suscribe-btn"><i class="pe-7s-search"></i></button>
-                    </div>
-                </form><!-- end /. form -->
-            </div>
-        </div><!-- end of/. row -->
-    </div><!-- end of /.container -->
-</section><!-- end of /.news letter section -->
 {% endblock %}
