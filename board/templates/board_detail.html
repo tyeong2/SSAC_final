@@ -6,6 +6,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="title">제목</label>
+                <span>&nbsp;&nbsp;{{ board.updated_at }}</span><br>
                 <textarea class="form-control" readonly>{{ board.title }}</textarea>
                 <label for="contents">내용</label>
                 <textarea class="form-control" readonly>{{ board.contents }}</textarea>
