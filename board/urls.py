@@ -19,4 +19,6 @@ urlpatterns = [
     path('comment/create/<int:board_id>/', views.comment_create_board, name='comment_create_board'),
     path('comment/modify/<int:comment_id>/', views.comment_modify_board, name='comment_modify_board'),
     path('comment/delete/<int:comment_id>/', views.comment_delete_board, name='comment_delete_board'),
+    path('vote_detail/<int:board_id>/', views.vote_board_detail, name='vote_board_detail'),
+    path('vote/<int:board_id>/', views.vote_board, name='vote_board'),
 ]
