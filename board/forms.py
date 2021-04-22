@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.hashers import check_password
-from .models import Member, Board
+from .models import Member, Board, Comment
 
 class LoginForm(forms.Form):
     user_email = forms.CharField(
@@ -53,3 +53,11 @@ class BoardUpdate(forms.ModelForm):
     class Meta:
         model = Board
         fields = ['title', 'contents', 'image']
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        labels = {
+            'content': '댓글내용',
+        }
