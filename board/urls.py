@@ -15,5 +15,8 @@ urlpatterns = [
     path('aboutus/', views.aboutus),
     path('design/', views.design),
     path('mypage/', views.mypage),
-    path('mypage/update/', views.mypage_update)
+    path('mypage/update/', views.mypage_update),
+    path('comment/create/<int:board_id>/', views.comment_create_board, name='comment_create_board'),
+    path('comment/modify/<int:comment_id>/', views.comment_modify_board, name='comment_modify_board'),
+    path('comment/delete/<int:comment_id>/', views.comment_delete_board, name='comment_delete_board'),
 ]
