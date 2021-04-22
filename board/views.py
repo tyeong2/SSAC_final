@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Member, Board, Cars, Comment
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
-from .forms import LoginForm, BoardForm, BoardUpdate, CommentForm
+from .forms import LoginForm, BoardForm, BoardUpdate, MemberUpdate, CommentForm
 from django.http import Http404
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -58,7 +58,41 @@ def mypage(request):
         return render(request, 'mypage.html', {'member':member})
 
 def mypage_update(request):
-    return render(request, 'mypage_update.html')
+    user_id = request.session.get('user')
+    if not user_id:
+        return redirect('/board/login/')
+    else:
+        member = Member.objects.get(id=user_id)
+        if request.method == 'POST':
+            res_data = {}
+            # member = Member.objects.get(pk=pk)
+            nickname = request.POST.get('nickname')
+            password_origin = request.POST.get('password-origin')
+            password_new = request.POST.get('password-new')
+            password_check = request.POST.get('password-check')
+            if not (nickname and password_origin and password_new and password_check):
+                res_data['error'] = '모든 값을 입력해주세요.'
+                return render(request, 'mypage_update.html', res_data)
+            elif not nickname:
+                res_data['error'] = '닉네임을 입력해주세요.'
+                return render(request, 'mypage_update.html', res_data)
+            elif Member.objects.filter(user_nickname=nickname).exists():
+                res_data['error'] = '이미 사용중인 닉네임 입니다.'
+                return render(request, 'mypage_update.html', res_data)
+            elif not check_password(password_origin, member.user_pw):
+                res_data['error'] = '기존의 비밀번호가 다릅니다.'
+                return render(request, 'mypage_update.html', res_data)
+            elif password_new != password_check:
+                res_data['error'] = '변경한 비밀번호가 서로 다릅니다.'
+                return render(request, 'mypage_update.html', res_data)
+            else:
+                member.user_nickname = nickname
+                member.user_pw = make_password(password_new)
+                member.save()
+                return redirect('/board/mypage/')
+        else:
+            form = MemberUpdate(instance=member)
+        return render(request, 'mypage_update.html', {'form':form})
 
 
 def home(request):
