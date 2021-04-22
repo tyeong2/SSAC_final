@@ -21,11 +21,12 @@ class Member(models.Model):
 class Board(models.Model):
     title       = models.CharField(max_length=200, verbose_name='제목')
     contents    = models.TextField(verbose_name='내용')
-    writer      = models.ForeignKey('board.Member', on_delete=models.CASCADE, verbose_name='작성자')
+    writer      = models.ForeignKey('board.Member', on_delete=models.CASCADE, verbose_name='작성자', related_name='writer_board')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     updated_at  = models.DateTimeField(auto_now=True, verbose_name='수정일')
     image       = models.ImageField(upload_to='images/', blank=True, null=True)
     hit         = models.PositiveIntegerField(default=0)
+    voter = models.ManyToManyField('board.Member', related_name='voter_board')
     # pip install django-imagekit
     # image       = ProcessedImageField(
     #     blank=True, processors=[Thumbnail(300, 300),], format='JPEG', options={'quality':90,}
