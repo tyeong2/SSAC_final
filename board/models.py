@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Member(models.Model):
-    user_email      = models.EmailField(max_length=100, verbose_name='유저 이메일')
-    user_nickname   = models.CharField(max_length=100, verbose_name='유저 닉네임')
+    user_email      = models.EmailField(max_length=100, blank=False, verbose_name='유저 이메일')
+    user_nickname   = models.CharField(max_length=100, blank=False, default='NoNickname', verbose_name='유저 닉네임')
     user_pw         = models.CharField(max_length=100, verbose_name='유저 비밀번호')
     user_created    = models.DateTimeField(auto_now_add=True, verbose_name='가입일')
     user_updated    = models.DateTimeField(auto_now=True, verbose_name='수정일')
