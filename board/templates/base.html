@@ -58,7 +58,11 @@
             <li><a href="/board/guide/">Guide</a></li>
             <li><a href="/board/design/">Design</a></li>
             <li><a href="/board/list/">Community</a></li>
+            {% if request.session.user %} 
+            <li><a href="/board/logout/">Logout</a></li>
+            {% else %} 
             <li><a href="/board/login/">Login</a></li>
+            {% endif %} 
             <ul class="nav navbar-nav navbar-right cart-menu">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -67,11 +71,6 @@
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="/board/mypage/">회원정보관리</a></li>
-                  {% if request.session.user %} 
-                  <li><a href="/board/logout/">Logout</a></li>
-                  {% else %} 
-                  <li><a href="/board/login/">Login</a></li>
-                  {% endif %} 
                 </ul>
               </li>
             </ul>
