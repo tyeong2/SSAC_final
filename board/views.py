@@ -118,7 +118,7 @@ def design(request):
                 return redirect('/board/login/')
 
             # 몽고DB 클라이언트 객체 생성
-            cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@13.209.75.4:27017/')['imagedb']
+            cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@127.0.0.1:27017/')['imagedb']
             fs = gridfs.GridFS(cardb)
 
             # 사용자로부터 원하는 차종, 브랜드 입력 받음
