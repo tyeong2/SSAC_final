@@ -59,5 +59,5 @@ class Comment(models.Model):
     author = models.ForeignKey('board.Member', on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
-    modify_date = models.DateTimeField(null=True, blank=True)
+    modify_date = models.DateTimeField(auto_now=True, null=True, blank=True)
     board = models.ForeignKey('board.Board', on_delete=models.CASCADE)
