@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from PIL import Image as pil
 from io import BytesIO
+import pymongo, gridfs, cv2, random, base64, numpy as np
+
 
 # Create your views here.
 def register(request):
@@ -112,16 +114,54 @@ def aboutus(request):
     return render(request, 'aboutus.html')
 
 def design(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'design.html')
+    else:
+        print(request.POST)
+        if not request.session.get('user'):
+            return redirect('/board/login/')
+
+        # 몽고DB 클라이언트 객체 생성
+        cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@127.0.0.1:27017/')['imagedb']
+        fs = gridfs.GridFS(cardb)
+
+        # 사용자로부터 원하는 차종, 브랜드 입력 받음
         type = request.POST.get('type')
         brand = request.POST.get('Brands')
-        cat_type = ['Hatchback', 'Sedan', 'Sports car', 'SUV', 'Van']
-        cat_brand = ['AUDI', 'Bentley', 'Benz', 'BMW', 'Chervolet', 'Chrysler',
-                     'Ferrari', 'Ford', 'Hyundai', 'Kia', 'Lamborghini', 'Landrover',
-                     'Mini', 'Nissan', 'Porsche', 'Ssangyong', 'Toyota', 'Volkswagen']
-        res = Cars.objects.filter(type=type, brand=brand)
+        # print(type, brand)
+        # 차종이나 브랜드를 선택하지 않았을 경우
+        if not (type and brand):
+            fail_msg = '차종과 브랜드를 모두 선택해주세요.'
+            return render(request, 'design.html', {'error': fail_msg})
 
-    return render(request, 'design.html')
+        # 넘겨받은 조건에 해당하는 이미지들을 가져온다.
+        img_list = list(cardb[type.lower()].find({'maker': brand.lower()}))
+        # print(len(img_list))
+
+        # 랜덤하게 5장 선택
+        try:
+            sample_list = random.sample(img_list, 5)
+        except:
+            fail_msg = '조건에 부합하는 디자인을 찾지 못했습니다.'
+            return render(request, 'design.html', {'error': fail_msg})
+        # 이미지 파일로 다시 변환
+        res_list = []
+        for doc in sample_list:
+            # 읽어오기
+            gOut = fs.get(doc['images'][0]['imageID'])
+            img = np.frombuffer(gOut.read(), dtype=np.uint8)
+            img = np.reshape(img, doc['images'][0]['shape'])
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            # 이미지 형식으로 변환
+            im_pil = Image.fromarray(img)
+            buffer = BytesIO()
+            im_pil.save(buffer, format='JPEG')
+            buffer64 = base64.b64encode(buffer.getvalue())
+            img_uri = u'data:img/jpeg;base64,'+buffer64.decode('utf-8')
+
+            res_list.append(img_uri)
+        return render(request, 'design.html', {'images':res_list})
 
 def login(request):
     '''
