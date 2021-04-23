@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Member, Board, Cars, Comment
+from .models import Member, Board, UserCar, Comment
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
 from .forms import LoginForm, BoardForm, BoardUpdate, MemberUpdate, CommentForm
