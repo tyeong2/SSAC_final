@@ -195,7 +195,7 @@ def design(request):
                 usercar.member = member
                 usercar.type = tmp_list[0][0]
                 usercar.brand = tmp_list[0][1]
-                usercar.img_path = SAVE_PATH
+                usercar.img_path = "\\" + SAVE_PATH
                 usercar.save()
             return render(request, 'design.html', {'error':'성공적으로 저장되었습니다'})
 
