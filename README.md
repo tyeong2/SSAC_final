@@ -5,6 +5,7 @@ SSAC mini project final
 > git clone https://github.com/tyeong2/SSAC_final.git  
 > cd SSAC_final  
 > pip install -r requirements.txt  
+> python manage.py makemigrations  
 > python manage.py migrate  
 > python manage.py runserver  
 
