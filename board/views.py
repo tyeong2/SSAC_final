@@ -6,7 +6,7 @@ from .forms import LoginForm, BoardForm, BoardUpdate, MemberUpdate, CommentForm
 from django.http import Http404
 from django.core.paginator import Paginator
 from django.contrib import messages
-from PIL import Image as pil
+from PIL import Image
 from io import BytesIO
 import pymongo, gridfs, cv2, random, base64, numpy as np
 
