@@ -13,7 +13,7 @@ SSAC mini project final
 > sh run.sh  
 
 # makemigrations 하기 전 확인사항
-community/settings.py >>> SECRET KEY 입력
+community/settings.py >>> SECRET KEY 입력  
 board/views.py >>> mongodb IP 확인 or 변경
 
 
