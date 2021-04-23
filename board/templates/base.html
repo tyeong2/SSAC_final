@@ -11,16 +11,16 @@
   <!--사용자의 디스플레이 장치의 화면 크기에 자동적으로 화면이 최적화되도록 하는 역할을 한다. -->
   <link rel="stylesheet" href="/static/css/style.css">
   <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+  <![endif]-->
+  <!-- 구버전 익스플로러에서도 정상적인 작동을 위한 기능-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
-  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
-  <![endif]-->
-  <!-- 구버전 익스플로러에서도 정상적인 작동을 위한 기능-->
 </head>
 
 <body>
@@ -70,8 +70,7 @@
                 <span class="caret"></span></a>
               <!-- caret은 아래쪽 화살표를 의미하는 아이콘이다 -->
               <ul class="dropdown-menu">
-                <li><a href="">회원정보관리</a></li>
-                <li><a href="">Logout</a></li>
+                <li><a href="/board/mypage/">회원정보관리</a></li>
               </ul>
             </li>
           </ul>
@@ -90,7 +89,7 @@
       <div class="col-md-12">
         <div class="social-media">
           <ul>
-            <li><a href="#"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://github.com/tyeong2/SSAC_final.git"><i class="fa fa-github"></i></a></li>
             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
