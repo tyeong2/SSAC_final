@@ -3,14 +3,14 @@ SSAC mini project final
 
 
 # 클론
-> git clone https://github.com/tyeong2/SSAC_final.git  
-> cd SSAC_final  
-> pip install -r requirements.txt  
-> python manage.py makemigrations  
-> python manage.py migrate  
-> python manage.py runserver  
+$ git clone https://github.com/tyeong2/SSAC_final.git  
+$ cd SSAC_final  
+$ pip install -r requirements.txt  
+$ python manage.py makemigrations  
+$ python manage.py migrate  
+$ python manage.py runserver  
 (AWS에서는)  
-> sh run.sh  
+$ sh run.sh  
 
 # makemigrations 하기 전 확인사항
 community/settings.py >>> SECRET KEY 입력  
