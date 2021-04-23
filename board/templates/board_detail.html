@@ -7,6 +7,14 @@
             <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
             <a href="{% url 'vote_board_detail' board.id  %}"
                class="recommend btn btn-sm btn-secondary btn-block my-1">좋아요</a>
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
         <div class="col-12">
             <div class="form-group">
