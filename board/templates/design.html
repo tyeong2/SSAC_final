@@ -19,7 +19,7 @@
                             {% if not images %}
                             <div class="item active">
                                 <img src="" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </div>
                             {% endif %}
                             <!-- 사용자가 생성하기를 사용했을 때 이미지를 띄워준다 -->
@@ -27,12 +27,12 @@
                             {% ifequal forloop.counter 1 %}
                             <div class="item active">
                                 <img src="{{ image }}" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </div>
                             {% else %}
                             <div class="item">
                                 <img src="{{ image }}" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </div>
                             {% endifequal %}
                             {% endfor %}
@@ -44,7 +44,7 @@
                             {% if not images %}
                             <li data-target="#feedback" data-slide-to="0" class="active">
                                 <img src="" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </li>
                             {% endif %}
                             <!-- 사용자가 생성하기를 사용했을 때 이미지를 띄워준다 -->
@@ -52,20 +52,16 @@
                             {% ifequal forloop.counter0 0 %}
                             <li data-target="#feedback" data-slide-to="{{ forloop.counter0 }}" class="active">
                                 <img src="{{ image }}" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </li>
                             {% else %}
                             <li data-target="#feedback" data-slide-to="{{ forloop.counter0 }}">
                                 <img src="{{ image }}" width="512" height="512" alt=""
-                                    onerror="this.src='/static/img/yellow_onerror.jpg'">
+                                    onerror="this.src='/static/img/showcar.png'">
                             </li>
                             {% endifequal %}
                             {% endfor %}
                         </ol>
-                        <select name="test0">
-                            <option>no1</option>
-                            <option>no2</option>
-                        </select>
 
                         <!-- Controls -->
                         <a class="left carousel-control" href="#feedback" role="button" data-slide="prev">
@@ -108,12 +104,25 @@
                     <label for="Porsche">Porsche</label>
                     <input type="radio" id="Volkswagen" name="Brands" value="Volkswagen">
                     <label for="Volkswagen">Volkswagen</label>
+                    <br><br><br><br><br><br>
+                    <h3>저장할 사진을 골라주세요</h3>
+                    <input type="checkbox" id="id_car" name="selected" value="0">
+                    <label for="id_car">1번쨰</label>&nbsp;&nbsp;
+                    <input type="checkbox" id="id_car" name="selected" value="1">
+                    <label for="id_car">2번쨰</label>&nbsp;&nbsp;
+                    <input type="checkbox" id="id_car" name="selected" value="2">
+                    <label for="id_car">3번쨰</label>&nbsp;&nbsp;
+                    <input type="checkbox" id="id_car" name="selected" value="3">
+                    <label for="id_car">4번쨰</label>&nbsp;&nbsp;
+                    <input type="checkbox" id="id_car" name="selected" value="4">
+                    <label for="id_car">5번쨰</label>&nbsp;&nbsp;
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-info">생성하기</button>
-                    <button class="btn btn-info">저장하기</button>
-                    <button class="btn btn-info">공유하기</button><br>
-                    <span>{{ error }}</span>
+                    <button type="submit" name="generate" class="btn btn-info">생성하기</button>
+                    <button type="submit" name="save" class="btn btn-info">저장하기</button>
+                    <button class="btn btn-info">공유하기</button>
+                    <br>
+                    <span style="font-weight:bold; color:red;">{{ error }}</span>
                 </div>
             </form>
         </div>
