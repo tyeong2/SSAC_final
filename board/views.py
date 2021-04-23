@@ -389,7 +389,7 @@ def vote_board_detail(request, board_id):
     x_man = Member.objects.get(pk=user_id)
 
     if x_man == board.writer:
-        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+        messages.warning(request, '본인 게시글은 추천할 수 없습니다')
     else:
         board.voter.add(x_man)
     return redirect('/board/detail/'+str(board.id))
@@ -401,7 +401,7 @@ def vote_board(request, board_id):
     x_man = Member.objects.get(pk=user_id)
 
     if x_man == board.writer:
-        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+        messages.warning(request, '본인 게시글은 추천할 수 없습니다')
     else:
         board.voter.add(x_man)
     return redirect('/board/list/')
