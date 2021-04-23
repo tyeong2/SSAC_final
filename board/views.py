@@ -151,7 +151,7 @@ def design(request):
             gOut = fs.get(doc['images'][0]['imageID'])
             img = np.frombuffer(gOut.read(), dtype=np.uint8)
             img = np.reshape(img, doc['images'][0]['shape'])
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
             # 이미지 형식으로 변환
             im_pil = Image.fromarray(img)
