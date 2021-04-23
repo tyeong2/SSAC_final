@@ -27,10 +27,6 @@ class Board(models.Model):
     image       = models.ImageField(upload_to='images/', blank=True, null=True)
     hit         = models.PositiveIntegerField(default=0)
     voter = models.ManyToManyField('board.Member', related_name='voter_board')
-    # pip install django-imagekit
-    # image       = ProcessedImageField(
-    #     blank=True, processors=[Thumbnail(300, 300),], format='JPEG', options={'quality':90,}
-    # )
 
     def __str__(self):
         return self.title
@@ -46,9 +42,11 @@ class Board(models.Model):
         verbose_name_plural = '게시판'
 
 
-class UserCars(models.Model):
-    user_email = models.ForeignKey('board.Member', on_delete=models.CASCADE, verbose_name='유저 이메일')
-    user_design = models.ImageField(width_field=512, height_field=512, verbose_name='저장 디자인')
+class UserCar(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, verbose_name='유저 이메일')
+    type = models.CharField(max_length=10, verbose_name='차종')
+    brand = models.CharField(max_length=10, verbose_name='브랜드')
+    img_path = models.CharField(max_length=100, default='/static/img/showcar.png', verbose_name='이미지 파일 경로')
     saved_at = models.DateTimeField(auto_now_add=True, verbose_name='저장 시각')
 
     class Meta:
@@ -56,16 +54,6 @@ class UserCars(models.Model):
         verbose_name = '유저 저장 이미지'
         verbose_name_plural = '유저 저장 이미지'
 
-
-class Cars(models.Model):
-    type = models.CharField(max_length=20, verbose_name='차종')
-    brand = models.CharField(max_length=20, verbose_name='브랜드')
-    design = models.ImageField(width_field=512, height_field=512, verbose_name='디자인')
-
-    class Meta:
-        db_table = 'cars'
-        verbose_name = '디자인데이터'
-        verbose_name_plural = '디자인데이터'
         
 class Comment(models.Model):
     author = models.ForeignKey('board.Member', on_delete=models.CASCADE)
