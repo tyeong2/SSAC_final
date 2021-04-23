@@ -6,9 +6,11 @@ from .forms import LoginForm, BoardForm, BoardUpdate, MemberUpdate, CommentForm
 from django.http import Http404
 from django.core.paginator import Paginator
 from django.contrib import messages
-from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from copy import deepcopy
 from io import BytesIO
-import pymongo, gridfs, cv2, random, base64, numpy as np
+from PIL import Image
+import os, pymongo, gridfs, cv2, random, base64, numpy as np
 
 
 # Create your views here.
@@ -98,13 +100,6 @@ def mypage_update(request):
 
 
 def home(request):
-    '''
-    user_id = request.session.get('user')
-    if user_id:
-        member = Member.objects.get(pk=user_id)
-        return HttpResponse(member.user_email)
-    return HttpResponse('Home!')
-    '''
     return render(request, 'index.html')
 
 def guide(request):
@@ -117,75 +112,94 @@ def design(request):
     if request.method == 'GET':
         return render(request, 'design.html')
     else:
-        print(request.POST)
-        if not request.session.get('user'):
-            return redirect('/board/login/')
+        # print(request.POST)
+        if 'generate' in request.POST: # 생성하기 눌렀을 때
+            if not request.session.get('user'):
+                return redirect('/board/login/')
 
-        # 몽고DB 클라이언트 객체 생성
-        cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@127.0.0.1:27017/')['imagedb']
-        fs = gridfs.GridFS(cardb)
+            # 몽고DB 클라이언트 객체 생성
+            cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@13.209.75.4:27017/')['imagedb']
+            fs = gridfs.GridFS(cardb)
 
-        # 사용자로부터 원하는 차종, 브랜드 입력 받음
-        type = request.POST.get('type')
-        brand = request.POST.get('Brands')
-        # print(type, brand)
-        # 차종이나 브랜드를 선택하지 않았을 경우
-        if not (type and brand):
-            fail_msg = '차종과 브랜드를 모두 선택해주세요.'
-            return render(request, 'design.html', {'error': fail_msg})
+            # 사용자로부터 원하는 차종, 브랜드 입력 받음
+            type = request.POST.get('type')
+            brand = request.POST.get('Brands')
+            # print([type, brand])
+            # 차종이나 브랜드를 선택하지 않았을 경우
+            if not (type and brand):
+                fail_msg = '차종과 브랜드를 모두 선택해주세요.'
+                return render(request, 'design.html', {'error': fail_msg})
 
-        # 넘겨받은 조건에 해당하는 이미지들을 가져온다.
-        img_list = list(cardb[type.lower()].find({'maker': brand.lower()}))
-        # print(len(img_list))
+            # 넘겨받은 조건에 해당하는 이미지들을 가져온다.
+            img_list = list(cardb[type.lower()].find({'maker': brand.lower()}))
+            # print(len(img_list))
 
-        # 랜덤하게 5장 선택
-        try:
-            sample_list = random.sample(img_list, 5)
-        except:
-            fail_msg = '조건에 부합하는 디자인을 찾지 못했습니다.'
-            return render(request, 'design.html', {'error': fail_msg})
-        # 이미지 파일로 다시 변환
-        res_list = []
-        for doc in sample_list:
-            # 읽어오기
-            gOut = fs.get(doc['images'][0]['imageID'])
-            img = np.frombuffer(gOut.read(), dtype=np.uint8)
-            img = np.reshape(img, doc['images'][0]['shape'])
-            # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            # 랜덤하게 5장 선택
+            try:
+                sample_list = random.sample(img_list, 5)
+            except:
+                fail_msg = '조건에 부합하는 디자인을 찾지 못했습니다.'
+                return render(request, 'design.html', {'error': fail_msg})
+            # 이미지 파일로 다시 변환
+            res_list = []
+            global tmp_list # 저장할 때 사용하도록 이미지를 임시 저장
+            tmp_list = []
+            tmp_list.append((type,brand))
+            for doc in sample_list:
+                # 읽어오기
+                gOut = fs.get(doc['images'][0]['imageID'])
+                img = np.frombuffer(gOut.read(), dtype=np.uint8)
+                img = np.reshape(img, doc['images'][0]['shape'])
+                # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-            # 이미지 형식으로 변환
-            im_pil = Image.fromarray(img)
-            buffer = BytesIO()
-            im_pil.save(buffer, format='JPEG')
-            buffer64 = base64.b64encode(buffer.getvalue())
-            img_uri = u'data:img/jpeg;base64,'+buffer64.decode('utf-8')
+                # 이미지 형식으로 변환
+                im_pil = Image.fromarray(img)
+                tmp_list.append(im_pil)
+                buffer = BytesIO()
+                im_pil.save(buffer, format='JPEG')
+                buffer64 = base64.b64encode(buffer.getvalue())
+                img_uri = u'data:img/jpeg;base64,'+buffer64.decode('utf-8')
 
-            res_list.append(img_uri)
-        return render(request, 'design.html', {'images':res_list})
+                res_list.append(img_uri)
+            return render(request, 'design.html', {'images':res_list})
+
+        elif 'save' in request.POST: # 저장하기 눌렀을 때
+            if not request.session.get('user'):
+                return redirect('/board/login/')
+            try:
+                tmp_list
+            except NameError:
+                fail_msg = '생성된 이미지가 없습니다.'
+                return render(request, 'design.html', {'error':fail_msg})
+            
+            #사용자 ID값 
+            user_id = request.session.get('user')
+            member = Member.objects.get(id=user_id)
+
+            selected = request.POST.getlist('selected')
+            # print(selected)
+            DIR_BASE = os.path.join('media','user')
+            os.makedirs(DIR_BASE, exist_ok=True)
+            for sel in selected:
+                img = tmp_list[int(sel)+1]
+                flist = os.listdir(DIR_BASE)
+                try:
+                    i = int(flist[-1].split('.')[0])
+                    fname = str(i+1).zfill(8)+'.jpg'
+                except:
+                    fname = str(0).zfill(8)+'.jpg'
+                SAVE_PATH = os.path.join(DIR_BASE, fname)
+                img.save(SAVE_PATH, format='JPEG')
+
+                usercar = UserCar()
+                usercar.member = member
+                usercar.type = tmp_list[0][0]
+                usercar.brand = tmp_list[0][1]
+                usercar.img_path = SAVE_PATH
+                usercar.save()
+            return render(request, 'design.html', {'error':'성공적으로 저장되었습니다'})
 
 def login(request):
-    '''
-    if request.method == 'GET':
-        return render(request, 'login.html')
-    elif request.method == 'POST':
-        user_email = request.POST.get('email')
-        user_pw = request.POST.get('password')
-
-        res_data = {}
-        if not (user_email and user_pw):
-            res_data['error'] = '모든 값을 입력하세요.'
-        else:
-            #데이터베이스에서 입력된 이메일의 사용자 정보를 가져온다.
-            member = Member.objects.get(user_email=user_email)
-
-            #비밀번호 검증
-            if check_password(user_pw, member.user_pw):
-                request.session['user'] = member.id
-                return redirect('/')
-            else:
-                res_data['error'] = '비밀번호가 틀렸습니다.'
-        return render(request, 'login.html', res_data)
-        '''
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
