@@ -42,17 +42,12 @@ class BoardForm(forms.Form):
         error_messages={'required': '내용을 입력하세요.'},
         widget=forms.Textarea,
         label='게시글 내용')
-    image = forms.ImageField(
-        label='첨부 이미지',
-        widget=forms.ClearableFileInput,
-        allow_empty_file=True
-    )
 
 
 class BoardUpdate(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['title', 'contents', 'image']
+        fields = ['title', 'contents', 'image_path']
         
 class MemberUpdate(forms.ModelForm):
     class Meta:
