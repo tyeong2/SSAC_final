@@ -24,7 +24,9 @@ class Board(models.Model):
     writer      = models.ForeignKey('board.Member', on_delete=models.CASCADE, verbose_name='작성자', related_name='writer_board')
     created_at  = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     updated_at  = models.DateTimeField(auto_now=True, verbose_name='수정일')
-    image       = models.ImageField(upload_to='images/', blank=True, null=True)
+    image_path  = models.CharField(max_length=100, verbose_name='게시글 사진 경로')
+    image_type  = models.CharField(max_length=20, verbose_name='게시글 사진 차종')
+    image_brand = models.CharField(max_length=20, verbose_name='게시글 사진 브랜드')
     hit         = models.PositiveIntegerField(default=0)
     voter = models.ManyToManyField('board.Member', related_name='voter_board')
 
@@ -43,11 +45,11 @@ class Board(models.Model):
 
 
 class UserCar(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, verbose_name='유저 이메일')
-    type = models.CharField(max_length=10, verbose_name='차종')
-    brand = models.CharField(max_length=10, verbose_name='브랜드')
-    img_path = models.CharField(max_length=100, default='/static/img/showcar.png', verbose_name='이미지 파일 경로')
-    saved_at = models.DateTimeField(auto_now_add=True, verbose_name='저장 시각')
+    member      = models.ForeignKey(Member, on_delete=models.CASCADE, verbose_name='유저 이메일')
+    img_type    = models.CharField(max_length=10, verbose_name='차종')
+    img_brand   = models.CharField(max_length=10, verbose_name='브랜드')
+    img_path    = models.CharField(max_length=100, default='/static/img/showcar.png', verbose_name='이미지 파일 경로')
+    saved_at    = models.DateTimeField(auto_now_add=True, verbose_name='저장 시각')
 
     class Meta:
         db_table = 'usercars'
