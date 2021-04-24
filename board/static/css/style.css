@@ -1146,7 +1146,6 @@ a.carousel-control.right>span {
     text-overflow: clip;
 }
 
-
 .best-caption {
   position: absolute;
   bottom: 0;
@@ -1332,57 +1331,47 @@ a.carousel-control.right>span {
 }
 
 /*
-    NEWS LATTER SECTION
+    LOGIN SECTION
  */
-.news-letter-section {
+.login-section {
   padding: 100px 0 60px;
   display: block;
   width: 100%;
 }
 
-.title-section {}
-
-.news-letter-section p {
-  color: #fff;
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 300;
-  margin-top: 25px;
+.login-section .login-from {
   display: block;
-  overflow: hidden;
+  width: 80%;
+  margin: 0px auto;
 }
 
-.subscribe-from {
-  display: block;
-  margin-top: 50px;
+.login-section .login-from span{
+  text-align: left;
 }
 
-.form-inline {
+.login-section .login-from .login-button button{
+  margin: 10px;
+}
+
+.login-section .form-inline {
   /*width: 100%;   */
   display: block;
   background: #fff;
   position: relative;
-  padding: 0;
-  border-radius: 10px;
+  padding: 10;
+  border-radius: 50px;
 }
 
-.form-group{
+.login-section .form-group{
   width: 100%;
   display: block;
 }
 
-.form-group img{
-  width: 512px;
-  height: 512px;
-  display: block;
-  margin: 0px auto;
-}
-
-.form-inline .form-group {
+.login-section .form-inline .form-group {
   margin-bottom: 0;
 }
 
-.subscribe-from .form-control {
+.login-section .login-from .form-control {
   display: block;
   width: 100% !important;
   height: 100%;
@@ -1392,28 +1381,220 @@ a.carousel-control.right>span {
   padding: 20px;
 }
 
-.subscribe-from .form-control:hover, .subscribe-from .form-control:focus {
+.login-section .login-from .form-control:hover, .login-from .form-control:focus {
   box-shadow: none !important;
   outline: none;
 }
 
 /*
-.suscribe-btn{
-    position: absolute;
-    display: block;
-    padding: 16px;
-    width: 100px;
-    background: #1abc9c;
-    border: none;
-    bottom: 2px;
-    top: 2px;
-    right: 2px;
+    BOARD-WRITE SECTION
+ */
+.board-write {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
 }
-.suscribe-btn i{
-    color: #fff;
-    font-size: 25px;
+
+.board-write p {
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  margin-top: 25px;
+  display: block;
+  overflow: hidden;
 }
-*/
+
+.board-write .subscribe-from {
+  display: block;
+  margin-top: 50px;
+}
+
+.board-write .form-inline {
+  /*width: 100%;   */
+  display: block;
+  background: #fff;
+  position: relative;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.board-write .form-group{
+  width: 100%;
+  display: block;
+}
+
+.board-write .form-group .save-design h3{
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Serif';
+  color: #555252;
+  display: block;
+  line-height: 24px;
+  position: relative;
+  margin: 0px;
+  left: 15pt;
+  padding: 0;
+}
+.board-write .form-group .save-button{
+  text-align: center;
+}
+
+.board-write .form-group .save-button button{
+  margin: 10px;
+}
+
+.board-write .form-inline .form-group {
+  margin-bottom: 0;
+}
+
+.board-write .subscribe-from .form-control {
+  display: block;
+  width: 100% !important;
+  height: 100%;
+  height: 63px;
+  color: #000;
+  font-size: 16px;
+  padding: 20px;
+}
+
+.board-write .subscribe-from .form-control:hover, .subscribe-from .form-control:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+/*
+    BOARD-UPDATE SECTION
+ */
+.board-update {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.board-update p {
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  margin-top: 25px;
+  display: block;
+  overflow: hidden;
+}
+
+.board-update .subscribe-from {
+  display: block;
+  margin-top: 50px;
+}
+
+.board-update .form-inline {
+  /*width: 100%;   */
+  display: block;
+  background: #fff;
+  position: relative;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.board-update .form-group{
+  width: 100%;
+  display: block;
+}
+
+.board-update .form-group img{
+  width: 512px;
+  height: 512px;
+  display: block;
+  margin: 0px auto;
+}
+.board-update .form-group .save-design h3{
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Serif';
+  color: #555252;
+  display: block;
+  line-height: 24px;
+  position: relative;
+  margin: 0px;
+  left: 15pt;
+  padding: 0;
+}
+.board-update .form-group .update-button{
+  text-align: center;
+}
+
+.board-update .form-group .update-button button{
+  margin: 30px;
+}
+
+.board-update .form-inline .form-group {
+  margin-bottom: 0;
+}
+
+.board-update .subscribe-from .form-control {
+  display: block;
+  width: 100% !important;
+  height: 100%;
+  height: 63px;
+  color: #000;
+  font-size: 16px;
+  padding: 20px;
+}
+
+.board-update .subscribe-from .form-control:hover, .subscribe-from .form-control:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+/*
+    PAGE SECTION
+ */
+.page-section {
+  padding: 60px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.page-section .page-bottom img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s
+}
+
+.page-section {
+  display: block;
+  margin-top: 50px;
+}
+
+.page-section .form-group{
+  width: 100%;
+  display: block;
+}
+
+.page-section h2{
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Serif';
+  color: #555252;
+  display: block;
+  line-height: 24px;
+  position: relative;
+  margin: 0px;
+  padding: 0;
+}
+
+.page-section .page-button{
+  text-align: center;
+}
+
+.page-section .page-button button{
+  margin: 30px;
+}
+
+.page-section .form-inline .form-group {
+  margin-bottom: 0;
+}
+
 /*
     CLIENT SECTION
  */
