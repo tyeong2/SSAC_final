@@ -943,6 +943,46 @@ a.carousel-control.right>span {
   margin-top: 0%;
 }
 
+.product-hit{
+    display: block;
+    width: 50%;
+    top: 0;
+    position: absolute;
+    top: 0;
+    height: 40px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.product-hit i{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    float: left;
+    padding: 10px;
+    padding-left: 15px;
+}
+.product-hit span{
+    display: block;
+    float: left;
+    text-align: right;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.product-hit img{
+    width : 100px;
+    height : 100px;
+    float: left;
+    text-align: left;
+
+}
+
 .product-like{
     display: block;
     background: #000000;
