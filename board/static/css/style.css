@@ -699,6 +699,10 @@ a.carousel-control.right>span {
     font-size: 15px;
 }
 
+.top-area .title-date button{
+    float: right;
+}
+
 .top-area .side-ri{
     display: inline-block;
     padding: 0px;
