@@ -54,7 +54,7 @@
           <img src="{{ board.image.url }}" class="img-responsive" width="512" height="512" alt="">
           <div class="product-like">
             <span>{{board.voter.count}}</span>
-            <a href="{% url 'vote_board_detail' board.id  %}"><i class="pe-7s-like"></i></a>
+            <a href="{% url 'vote_board' board.id  %}"><i class="pe-7s-like"></i></a>
           </div>
           <div class="product-title">
             <a href="/board/detail/{{ board.id }}/">
