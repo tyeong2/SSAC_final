@@ -1,58 +1,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container" xmlns:font-size="http://www.w3.org/1999/xhtml">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="title-section wow fadeInDown animated ">
-                <h1>게시글 작성</h1>
+<section class="board-write">
+    <div class="container" xmlns:font-size="http://www.w3.org/1999/xhtml">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title-section wow fadeInDown animated ">
+                    <h1>게시글 작성</h1>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="form-group">
-                <form method="POST" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <label for="{{ field.id_for_label }}">
-                        {{ field.label }}
-                    </label>
-                    {% ifequal field.name 'contents' %}
-                    <textarea class="form-control h-25" name="{{ field.name }}" placeholder="내용을 입력해주세요!"
-                        id="exampleTextarea" rows="20" style="font-size: 12pt"></textarea>
-                    {% else %}
-                    <input type="{{ field.field.widget.input_type }}" class="form-control form-control-lg"
-                        id="{{ field.id_for_label }}" placeholder="제목" name="{{ field.name }}"
-                        style="font-size: 10pt" />
-                    {% endifequal %}
-                    {% if field.errors %}
-                    <span style="color: red;">{{ field.errors }}</span>
-                    {% endif %}
-                    {% endfor %}
-                    <br />
-                    <div class="container">
-                        {% if member.usercar_set.count > 0 %}
-                        <h2>저장한 디자인</h2>
-                        <div class="row featured isotope">
-                            <span>{{member.usercar.img_path}}</span>
-                            {% for usercar in member.usercar_set.all %}
-                            <div class="col-md-3 col-sm-6 col-xs-12 featured-items isotope-item">
-                                <fieldset>
-                                    <input id="check-img" type="radio" name="img_path" value="{{ usercar.img_path }}">
-                                    <label for="check-img"><img src="{{ usercar.img_path }}" class="img-responsive"
-                                            width="512" height="512" alt=""></label>
-                                </fieldset>
-                            </div>
-                            {% endfor %}
-                        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+                        {% ifequal field.name 'contents' %}
+                        <textarea class="form-control h-25" name="{{ field.name }}" placeholder="내용을 입력해주세요!"
+                                  id="exampleTextarea" rows="20" style="font-size: 12pt"></textarea>
+                        {% else %}
+                        <input type="{{ field.field.widget.input_type }}" class="form-control form-control-lg"
+                               id="{{ field.id_for_label }}" placeholder="제목" name="{{ field.name }}"
+                               style="font-size: 10pt" />
+                        {% endifequal %}
+                        {% if field.errors %}
+                        <span style="color: red;">{{ field.errors }}</span>
                         {% endif %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <button type="button" class="btn btn-primary" onclick="location.href='../list/'">돌아가기</button>
-                </form>
+                        {% endfor %}
+                        <br />
+                        <div class="row">
+                            <div class="save-design">
+                                {% if member.usercar_set.count > 0 %}
+                                <h3>저장한 디자인</h3>
+                                <div class="row featured isotope">
+                                    <span>{{member.usercar.img_path}}</span>
+                                    {% for usercar in member.usercar_set.all %}
+                                    <div class="col-md-3 col-sm-6 col-xs-12 featured-items isotope-item">
+                                        <fieldset>
+                                            <input id="check-img" type="radio" name="img_path" value="{{ usercar.img_path }}">
+                                            <label for="check-img"><img src="{{ usercar.img_path }}" class="img-responsive"
+                                                                        width="512" height="512" alt=""></label>
+                                        </fieldset>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="save-button">
+                            <button type="submit" class="btn btn-primary">등록하기</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='../list/'">돌아가기</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}
