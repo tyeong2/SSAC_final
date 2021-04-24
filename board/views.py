@@ -122,16 +122,16 @@ def design(request):
             fs = gridfs.GridFS(cardb)
 
             # 사용자로부터 원하는 차종, 브랜드 입력 받음
-            type = request.POST.get('type')
-            brand = request.POST.get('Brands')
+            img_type = request.POST.get('type')
+            img_brand = request.POST.get('Brands')
             # print([type, brand])
             # 차종이나 브랜드를 선택하지 않았을 경우
-            if not (type and brand):
+            if not (img_type and img_brand):
                 fail_msg = '차종과 브랜드를 모두 선택해주세요.'
                 return render(request, 'design.html', {'error': fail_msg})
 
             # 넘겨받은 조건에 해당하는 이미지들을 가져온다.
-            img_list = list(cardb[type.lower()].find({'maker': brand.lower()}))
+            img_list = list(cardb[img_type.lower()].find({'maker': img_brand.lower()}))
             # print(len(img_list))
 
             # 랜덤하게 5장 선택
@@ -144,13 +144,12 @@ def design(request):
             res_list = []
             global tmp_list # 저장할 때 사용하도록 이미지를 임시 저장
             tmp_list = []
-            tmp_list.append((type,brand))
+            tmp_list.append((img_type,img_brand))
             for doc in sample_list:
                 # 읽어오기
                 gOut = fs.get(doc['images'][0]['imageID'])
                 img = np.frombuffer(gOut.read(), dtype=np.uint8)
                 img = np.reshape(img, doc['images'][0]['shape'])
-                # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
                 # 이미지 형식으로 변환
                 im_pil = Image.fromarray(img)
@@ -166,18 +165,17 @@ def design(request):
         elif 'save' in request.POST: # 저장하기 눌렀을 때
             if not request.session.get('user'):
                 return redirect('/board/login/')
+
             try:
                 tmp_list
             except NameError:
                 fail_msg = '생성된 이미지가 없습니다.'
                 return render(request, 'design.html', {'error':fail_msg})
-            
-            #사용자 ID값 
+
             user_id = request.session.get('user')
             member = Member.objects.get(id=user_id)
 
             selected = request.POST.getlist('selected')
-            # print(selected)
             DIR_BASE = os.path.join('media','user')
             os.makedirs(DIR_BASE, exist_ok=True)
             for sel in selected:
@@ -190,12 +188,12 @@ def design(request):
                     fname = str(0).zfill(8)+'.jpg'
                 SAVE_PATH = os.path.join(DIR_BASE, fname)
                 img.save(SAVE_PATH, format='JPEG')
-
-                usercar = UserCar()
-                usercar.member = member
-                usercar.type = tmp_list[0][0]
-                usercar.brand = tmp_list[0][1]
-                usercar.img_path = "\\" + SAVE_PATH
+                
+                usercar = UserCar(
+                    member = member,
+                    img_type = tmp_list[0][0],
+                    img_brand = tmp_list[0][1],
+                    img_path = '\\' + SAVE_PATH)
                 usercar.save()
             return render(request, 'design.html', {'error':'성공적으로 저장되었습니다'})
 
@@ -230,47 +228,35 @@ def board_list(request):
 def board_write(request):
     #로그인 하지 않은 접속자인지 확인
     if not request.session.get('user'):
-        return redirect('/board/login/')
+        return redirect('login')
+
+    user_id = request.session.get('user')
+    member = Member.objects.get(pk=user_id)
 
     if request.method == 'POST':
-        form = BoardForm(request.POST, request.FILES)
+        form = BoardForm(request.POST)
         if form.is_valid():
-            user_id = request.session.get('user')
-            member = Member.objects.get(pk=user_id)
-
+            # 검증 성공 시 cleaned_data 제공
+            # 실패시 form.error에 오류 저장
             board = Board()
             board.title = form.cleaned_data['title']
             board.contents = form.cleaned_data['contents']
-            board.image = form.cleaned_data['image']
-            #검증 성공 시 cleaned_data 제공
-            #실패시 form.error에 오류 저장
+            image_path = request.POST.get('img_path')
+            # 저장된 모델 검색
+            usercar = UserCar.objects.get(img_path=image_path)
+            board.image_path = usercar.img_path
+            board.image_type = usercar.type
+            board.image_brand = usercar.brand
 
             board.writer = member
             board.save()
             return redirect('/board/list/')
     else:
+        context = {}
         form = BoardForm()
-    return render(request, 'board_write.html', {'form' : form})
-
-
-def rescale(image, width):
-    img = pil.open(image)
-
-    src_width, src_height = img.size
-    if src_width <= width:
-        return image
-    else:
-        src_ratio = float(src_height) / float(src_width)
-        dst_height = round(src_ratio * width)
-
-        img = img.resize((width, dst_height), pil.BILINEAR)
-        # img.save(image.name, 'PNG')
-        # image.file = img
-
-        # 이게 없으면 attribute error 발생
-        # image.file.name = image.name
-        # return image
-        return img
+        context['form'] = form
+        context['member'] = member
+    return render(request, 'board_write.html', context)
 
 
 def board_detail(request, pk):
@@ -305,10 +291,9 @@ def board_update(request, pk):
                 board = Board.objects.get(pk=pk)
                 board.title = form.cleaned_data['title']
                 board.contents = form.cleaned_data['contents']
-                if form.cleaned_data['image']:
-                    board.image = form.cleaned_data['image']
-                else:
-                    board.image = board.image
+                board.image_path = board.image_path
+                board.image_type = board.image_type
+                board.image_brand = board.image_brand
                 # 검증 성공 시 cleaned_data 제공
                 # 실패시 form.error에 오류 저장
 
