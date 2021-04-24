@@ -653,6 +653,96 @@ a.carousel-control.right>span {
 }
 
 /*
+    BOARD_DETAIL
+*/
+.board-detail {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
+}
+.top-area{
+    box-shadow:
+        0 0 0 0 #888,
+        0 0 0 0 #888,
+        0 2px 0 0 #888,
+        0 0 0 0 #888 inset,
+        0 2px 0 0 #888 inset;
+}
+.mid-area{
+    box-shadow:
+        0 0 0 0 #888,
+        0 0 0 0 #888,
+        0 2px 0 0 #FFFFFF,
+        0 0 0 0 #EAEAEA inset,
+        0 2px 0 0 #EAEAEA inset;
+}
+.top-area{
+    background: #FAFAFA;
+}
+.top-area .title-board{
+    display: inline-block;
+    padding: 20px;
+}
+
+.top-area .title-date{
+    display: inline-block;
+    float: right;
+    padding: 0px;
+}
+
+.top-area .title-board span{
+  color: #1abc9c;
+  font-size: 30px;
+}
+
+.top-area .title-date span{
+    font-size: 15px;
+}
+
+.top-area .side-ri{
+    display: inline-block;
+    padding: 0px;
+    float: right;
+    margin-top: 20px;
+}
+
+.top-area .side-le{
+    display: inline-block;
+    float: left;
+    padding: 10px;
+}
+
+.top-area .side-ri span{
+  color: #1abc9c;
+  font-size: 10px;
+}
+
+.top-area .side-le span{
+    font-size: 10px;
+}
+.mid-area{
+    padding: 10px;
+}
+.mid-area img{
+    width: 512px;
+    height: 512px;
+    display: block;
+    margin: 0px auto;
+    padding: 10px;
+}
+.mid-area .mid-area-contents{
+    padding:10px;
+    font-size:15px;
+}
+.br_body_bottom .br_body_bottom_button{
+   text-align: center;
+}
+
+.br_body_bottom .br_body_bottom_button button{
+   margin:20px;
+}
+
+/*
     ABOUT SECTION
  */
 .about-section {
