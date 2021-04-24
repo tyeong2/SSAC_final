@@ -112,13 +112,13 @@ def design(request):
     if request.method == 'GET':
         return render(request, 'design.html')
     else:
-        # print(request.POST)
+        user_id = request.session.get('user')
         if 'generate' in request.POST: # 생성하기 눌렀을 때
-            if not request.session.get('user'):
+            if not user_id:
                 return redirect('/board/login/')
 
             # 몽고DB 클라이언트 객체 생성
-            cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@127.0.0.1:27017/')['imagedb']
+            cardb = pymongo.MongoClient('mongodb://opadak:1q2w3e@13.209.75.4:27017/')['imagedb']
             fs = gridfs.GridFS(cardb)
 
             # 사용자로부터 원하는 차종, 브랜드 입력 받음
@@ -131,6 +131,7 @@ def design(request):
                 return render(request, 'design.html', {'error': fail_msg})
 
             # 넘겨받은 조건에 해당하는 이미지들을 가져온다.
+            # img_type에 해당하는 컬렉션에서 maker가 img_brand인 도큐먼트들을 불러온다.
             img_list = list(cardb[img_type.lower()].find({'maker': img_brand.lower()}))
             # print(len(img_list))
 
@@ -142,14 +143,16 @@ def design(request):
                 return render(request, 'design.html', {'error': fail_msg})
             # 이미지 파일로 다시 변환
             res_list = []
-            global tmp_list # 저장할 때 사용하도록 이미지를 임시 저장
-            tmp_list = []
+            global context
+            context = {}
+            tmp_list = [] # 저장할 때 사용하도록 이미지를 임시 저장
             tmp_list.append((img_type,img_brand))
             for doc in sample_list:
                 # 읽어오기
                 gOut = fs.get(doc['images'][0]['imageID'])
                 img = np.frombuffer(gOut.read(), dtype=np.uint8)
                 img = np.reshape(img, doc['images'][0]['shape'])
+                # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
                 # 이미지 형식으로 변환
                 im_pil = Image.fromarray(img)
@@ -160,21 +163,21 @@ def design(request):
                 img_uri = u'data:img/jpeg;base64,'+buffer64.decode('utf-8')
 
                 res_list.append(img_uri)
+            context['images'] = res_list
+            context['tmp'] = tmp_list
             return render(request, 'design.html', {'images':res_list})
 
         elif 'save' in request.POST: # 저장하기 눌렀을 때
             if not request.session.get('user'):
                 return redirect('/board/login/')
-
             try:
-                tmp_list
+                context['tmp']
+                tmp_list = context['tmp']
             except NameError:
                 fail_msg = '생성된 이미지가 없습니다.'
                 return render(request, 'design.html', {'error':fail_msg})
 
-            user_id = request.session.get('user')
             member = Member.objects.get(id=user_id)
-
             selected = request.POST.getlist('selected')
             DIR_BASE = os.path.join('media','user')
             os.makedirs(DIR_BASE, exist_ok=True)
@@ -188,14 +191,15 @@ def design(request):
                     fname = str(0).zfill(8)+'.jpg'
                 SAVE_PATH = os.path.join(DIR_BASE, fname)
                 img.save(SAVE_PATH, format='JPEG')
-                
+
                 usercar = UserCar(
                     member = member,
                     img_type = tmp_list[0][0],
                     img_brand = tmp_list[0][1],
                     img_path = '\\' + SAVE_PATH)
                 usercar.save()
-            return render(request, 'design.html', {'error':'성공적으로 저장되었습니다'})
+                context['error'] = '성공적으로 저장되었습니다.'
+            return render(request, 'design.html', context)
 
 def login(request):
     if request.method == 'POST':
