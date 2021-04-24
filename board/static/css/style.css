@@ -653,6 +653,61 @@ a.carousel-control.right>span {
 }
 
 /*
+    ABOUT SECTION
+ */
+.about-section {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.about-section .content p {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  line-height: 32px;
+  margin: 20px;
+  padding: 40px;
+}
+
+.about-section .content img {
+  float: left;
+  margin-top: 50px;
+  margin-right: 10px;
+}
+
+.about-section .item img {
+    position: relative;
+    display: block;
+    width: 80%;
+    height: 80%;
+    padding: 10px;
+    margin: 0px auto;
+}
+
+/*
+    GUIDE SECTION
+ */
+.guide-section {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.guide-section .content p{
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  line-height: 32px;
+  margin: 30px;
+  padding: 30px;
+}
+.guide-section .content img {
+  float: left;
+  margin-right: 10px;
+}
+
+/*
     REVIEW SECTION
  */
 .review-section {
