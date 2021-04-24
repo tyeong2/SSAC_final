@@ -1116,13 +1116,13 @@ a.carousel-control.right>span {
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 15px;
     padding: 5px;
 }
 
 .product-hit img{
-    width : 100px;
-    height : 100px;
+    width : 25px;
+    height : 25px;
     float: left;
     text-align: left;
 
