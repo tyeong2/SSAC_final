@@ -966,6 +966,91 @@ a.carousel-control.right>span {
 }
 
 /*
+    DESIGN SECTION
+ */
+.design-section {
+  padding: 100px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.design-section .feedback {
+  display: block;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.design-section .feedback .item:before {
+  display: none;
+}
+
+.design-section .feedback .item {
+  text-align: center;
+}
+
+.design-section .feedback .item img {
+  display: inline-block;
+  margin: 0 auto;
+  height: 512px;
+  width: 512px;
+  text-align: center;
+}
+
+.design-section .feedback .item img{
+  width: 80%;
+  height: 80%;
+}
+
+.design-section .design-controller {
+  position: relative;
+  margin: 0 auto;
+  display: inline-block;
+  top: 10px;
+  left: 0;
+  right: 0;
+  width: auto;
+}
+
+.design-section .design-controller li {
+  height: 85px;
+  width: 85px;
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  border: 5px solid #000;
+  margin: 10px;
+}
+
+.design-section .design-controller li.active {
+  height: 85px;
+  width: 85px;
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  border: 5px solid #1abc9c;
+  margin: 10px;
+}
+
+.design-section .design-controller li img {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.design-section .sub button{
+    position: relative;
+    top: 30px;
+    font-size: 17px;
+    margin: 10px;
+}
+
+/*
     NEW PRODUCR SECTION
  */
 .new-section {
