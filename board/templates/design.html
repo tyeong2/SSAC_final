@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="review-section">
+<section class="design-section">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="tite-section wow fadeInDown animated ">
+                <div class="title-section wow fadeInDown animated">
                     <h1>Design</h1>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         </div>
 
                         <!-- Indicators -->
-                        <ol class="carousel-indicators review-controlar">
+                        <ol class="carousel-indicators design-controller">
                             <!-- 아무 작업도 하지 않았을 때의 초기 이미지 -->
                             {% if not images %}
                             <li data-target="#feedback" data-slide-to="0" class="active">
@@ -62,7 +62,6 @@
                             {% endifequal %}
                             {% endfor %}
                         </ol>
-
                         <!-- Controls -->
                         <a class="left carousel-control" href="#feedback" role="button" data-slide="prev">
                             <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
@@ -74,61 +73,62 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <h3>Vehicle type</h3>
-                    <input type="radio" id="Hatchback" name="type" value="Hatchback">
-                    <label for="Hatchback">Hatchback</label>
-                    <input type="radio" id="Sedan" name="type" value="Sedan">
-                    <label for="Sedan">Sedan</label>
-                    <input type="radio" id="SportsCar" name="type" value="SportsCar">
-                    <label for="SportsCar">Sports Car</label>
-                    <input type="radio" id="SUV" name="type" value="SUV">
-                    <label for="SUV">SUV</label>
-                    <br/>
-                    <h3>Brands</h3>
-                    <input type="radio" id="AUDI" name="Brands" value="AUDI">
-                    <label for="AUDI">AUDI</label>
-                    <input type="radio" id="Bentley" name="Brands" value="Bentley">
-                    <label for="Bentley">Bentley</label>
-                    <input type="radio" id="Benz" name="Brands" value="Benz">
-                    <label for="Benz">Benz</label>
-                    <br/>
-                    <input type="radio" id="BMW" name="Brands" value="BMW">
-                    <label for="BMW">BMW</label>
-                    <input type="radio" id="Chrysler" name="Brands" value="Chrysler">
-                    <label for="Chrysler">Chrysler</label>
-                    <input type="radio" id="Ferrari" name="Brands" value="Ferrari">
-                    <label for="Ferrari">Ferrari</label>
-                    <br/>
-                    <input type="radio" id="Hyundai" name="Brands" value="Hyundai">
-                    <label for="Hyundai">Hyundai</label>
-                    <input type="radio" id="Kia" name="Brands" value="Kia">
-                    <label for="Kia">Kia</label>
-                    <input type="radio" id="Porsche" name="Brands" value="Porsche">
-                    <label for="Porsche">Porsche</label>
-                    <br/>
-                    <input type="radio" id="Volkswagen" name="Brands" value="Volkswagen">
-                    <label for="Volkswagen">Volkswagen</label>
-                    <br><br><br>
-                    <h3>저장할 사진을 골라주세요</h3>
-                    <input type="checkbox" id="id_car1" name="selected" value="0">
-                    <label for="id_car1">1번쨰</label>&nbsp;&nbsp;
-                    <input type="checkbox" id="id_car2" name="selected" value="1">
-                    <label for="id_car2">2번쨰</label>&nbsp;&nbsp;
-                    <input type="checkbox" id="id_ca3r" name="selected" value="2">
-                    <label for="id_car3">3번쨰</label>&nbsp;&nbsp;<br/>
-                    <input type="checkbox" id="id_car4" name="selected" value="3">
-                    <label for="id_car4">4번쨰</label>&nbsp;&nbsp;
-                    <input type="checkbox" id="id_car5" name="selected" value="4">
-                    <label for="id_car5">5번쨰</label>&nbsp;&nbsp;
+                    <div class="box">
+                        <h3>Vehicle type</h3>
+                        <input type="radio" id="Hatchback" name="type" value="Hatchback">
+                        <label for="Hatchback">Hatchback</label>
+                        <input type="radio" id="Sedan" name="type" value="Sedan">
+                        <label for="Sedan">Sedan</label>
+                        <br />
+                        <input type="radio" id="SportsCar" name="type" value="SportsCar">
+                        <label for="SportsCar">Sports Car</label>
+                        <input type="radio" id="SUV" name="type" value="SUV">
+                        <label for="SUV">SUV</label>
+                        <h3>Brands</h3>
+                        <input type="radio" id="AUDI" name="Brands" value="AUDI">
+                        <label for="AUDI">AUDI</label>
+                        <input type="radio" id="Bentley" name="Brands" value="Bentley">
+                        <label for="Bentley">Bentley</label>
+                        <input type="radio" id="Benz" name="Brands" value="Benz">
+                        <label for="Benz">Benz</label>
+                        <br />
+                        <input type="radio" id="BMW" name="Brands" value="BMW">
+                        <label for="BMW">BMW</label>
+                        <input type="radio" id="Chrysler" name="Brands" value="Chrysler">
+                        <label for="Chrysler">Chrysler</label>
+                        <input type="radio" id="Ferrari" name="Brands" value="Ferrari">
+                        <label for="Ferrari">Ferrari</label>
+                        <br />
+                        <input type="radio" id="Hyundai" name="Brands" value="Hyundai">
+                        <label for="Hyundai">Hyundai</label>
+                        <input type="radio" id="Kia" name="Brands" value="Kia">
+                        <label for="Kia">Kia</label>
+                        <input type="radio" id="Porsche" name="Brands" value="Porsche">
+                        <label for="Porsche">Porsche</label>
+                        <br />
+                        <input type="radio" id="Volkswagen" name="Brands" value="Volkswagen">
+                        <label for="Volkswagen">Volkswagen</label>
+                        <br><br><br>
+                        <h3>저장할 사진을 골라주세요</h3>
+                        <input type="checkbox" id="id_car1" name="selected" value="0">
+                        <label for="id_car1">1번쨰</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="id_car2" name="selected" value="1">
+                        <label for="id_car2">2번쨰</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="id_car3" name="selected" value="2">
+                        <label for="id_car3">3번쨰</label>&nbsp;&nbsp;<br />
+                        <input type="checkbox" id="id_car4" name="selected" value="3">
+                        <label for="id_car4">4번쨰</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="id_car5" name="selected" value="4">
+                        <label for="id_car5">5번쨰</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="sub">
+                        <button type="submit" name="generate" class="btn btn-info">생성하기</button>
+                        <button type="submit" name="save" class="btn btn-info">저장하기</button>
+                        <button type="submit" name="write" class="btn btn-info">공유하기</button>
+                        <br><br><br><br>
+                        <span style="font-weight:bold; color:red;">{{ error }}</span>
+                    </div>
                 </div>
-                <div class="sub">
-                    <button type="submit" name="generate" class="btn btn-info">생성하기</button>
-                    <button type="submit" name="save" class="btn btn-info">저장하기</button>
-                    <button type="submit" name="write" class="btn btn-info">공유하기</button>
-                    <br>
-                    <span style="font-weight:bold; color:red;">{{ error }}</span>
-                </div>
-              </div>
             </form>
         </div>
     </div>
