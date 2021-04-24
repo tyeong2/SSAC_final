@@ -1,46 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="titie-section wow fadeInDown animated ">
-                <h1>회원정보</h1>
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title-section wow fadeInDown animated">
+                    <h1>회원정보</h1>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="email">사용자 이메일</label>
-                <textarea class="form-control" readonly>{{ member.user_email }}</textarea>
-                <label for="nickname">사용자 닉네임</label>
-                <textarea class="form-control" readonly>{{ member.user_nickname }}</textarea>
-                <label for="created_at">최초가입일</label>
-                <textarea class="form-control" readonly>{{ member.user_created }}</textarea>
-                <label for="updated_at">정보수정일</label>
-                <textarea class="form-control" readonly>{{ member.user_updated }}</textarea>
-                <!-- 유저 저장 이미지 영역 -->
-            </div>
-            <div>
-                <button type="button" class="btn btn-primary" onclick="location.href='/board/mypage/update/'">정보 수정</button>
-            </div>
-        </div>
-    </div>
-    {% if member.usercar_set.count > 0 %}
-    <h1 for="save_picture">저장사진</h1>
-    <div class="row featured isotope">
-        <span>{{member.usercar.img_path}}</span>
-        {% for usercar in member.usercar_set.all %}
-        <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
-            <div class="product-item">
-                <img src= {{usercar.img_path}}  class="img-responsive" width="512" height="512" alt="">
-
-
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>사용자 이메일</label>
+                    <textarea class="form-control" readonly>{{ member.user_email }}</textarea>
+                    <label>사용자 닉네임</label>
+                    <textarea class="form-control" readonly>{{ member.user_nickname }}</textarea>
+                    <label>최초가입일</label>
+                    <textarea class="form-control" readonly>{{ member.user_created }}</textarea>
+                    <label>정보수정일</label>
+                    <textarea class="form-control" readonly>{{ member.user_updated }}</textarea>
+                    <!-- 유저 저장 이미지 영역 -->
+                </div>
+                <div class="page-button">
+                    <button type="button" class="btn btn-primary" onclick="location.href='/board/mypage/update/'">정보 수정</button>
+                </div>
             </div>
         </div>
-        {% endfor %}
+        {% if member.usercar_set.count > 0 %}
+        <div class="page-bottom">
+            <h2>저장사진</h2>
+            <div class="row featured isotope">
+                <span>{{member.usercar.img_path}}</span>
+                {% for usercar in member.usercar_set.all %}
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                    <img src= {{usercar.img_path}}  class="img-responsive" width="512" height="512" alt="">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-</div>
+</section>
 {% endblock %}
