@@ -203,13 +203,13 @@ html, body, .wrapper {
   height: 100%;
 }
 
-.titie-section {
+.title-section {
   margin-bottom: 30px;
   display: block;
   position: relative;
 }
 
-.titie-section h1 {
+.title-section h1 {
   margin: 0;
   padding: 0;
   display: block;
@@ -220,7 +220,7 @@ html, body, .wrapper {
   text-transform: uppercase;
 }
 
-.titie-section h1:before {
+.title-section h1:before {
   content: "";
   width: 165px;
   display: block;
@@ -233,7 +233,7 @@ html, body, .wrapper {
   right: 0;
 }
 
-.titie-section h1:after {
+.title-section h1:after {
   content: "";
   width: 165px;
   display: block;
@@ -246,7 +246,7 @@ html, body, .wrapper {
   right: 0;
 }
 
-.titie-section:after {
+.title-section:after {
   content: "";
   width: 165px;
   display: block;
@@ -259,7 +259,7 @@ html, body, .wrapper {
   right: 0;
 }
 
-.titie-section.white h1:before {
+.title-section.white h1:before {
   content: "";
   width: 165px;
   display: block;
@@ -272,7 +272,7 @@ html, body, .wrapper {
   right: 0;
 }
 
-.titie-section.white h1:after {
+.title-section.white h1:after {
   content: "";
   width: 165px;
   display: block;
@@ -285,7 +285,7 @@ html, body, .wrapper {
   right: 0;
 }
 
-.titie-section.white:after {
+.title-section.white:after {
   content: "";
   width: 165px;
   display: block;
@@ -751,6 +751,11 @@ a.carousel-control.right>span {
   width: 100%;
 }
 
+.about-section .title-section {
+  display: block;
+  margin-bottom: 80px;
+}
+
 .about-section .content p {
   font-size: 15px;
   font-weight: 600;
@@ -784,6 +789,12 @@ a.carousel-control.right>span {
   width: 100%;
 }
 
+.guide-section .title-section {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 90px;
+}
+
 .guide-section .content p{
   font-size: 15px;
   font-weight: 600;
@@ -795,6 +806,51 @@ a.carousel-control.right>span {
 .guide-section .content img {
   float: left;
   margin-right: 10px;
+}
+.guide-section .guide-table{
+    padding:0px 130px;
+}
+
+.guide-section .guide-table details {
+    font-size: 16px;
+    width: 100%;
+}
+
+.guide-section .guide-table details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+}
+
+.guide-section .guide-table summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+    background-color: #f1f1f1;
+}
+
+.guide-section .guide-table summary img{
+    margin: -.3em -.5em 0;
+    padding: .5em;
+    display: block;
+    float: right;
+}
+
+.guide-section .guide-table details[open] {
+    padding: .5em;
+}
+
+.guide-section .guide-table details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+.guide-section .item img {
+    position: relative;
+    display: block;
+    width: 80%;
+    height: 80%;
+    padding: 10px;
+    margin: 0px auto;
 }
 
 /*
@@ -1256,7 +1312,7 @@ a.carousel-control.right>span {
   width: 100%;
 }
 
-.titie-section {}
+.title-section {}
 
 .news-letter-section p {
   color: #fff;
@@ -1356,7 +1412,7 @@ a.carousel-control.right>span {
   padding: 100px 0 80px;
 }
 
-.news-section .titie-section {
+.news-section .title-section {
   display: block;
   margin-bottom: 80px;
 }
@@ -1437,12 +1493,12 @@ a.carousel-control.right>span {
   background: rgba(45, 50, 55, .55)
 }
 
-.contact-section .titie-section {
+.contact-section .title-section {
   display: block;
   margin-bottom: 80px;
 }
 
-.contact-section .titie-section h1 {
+.contact-section .title-section h1 {
   color: #fff;
 }
 
@@ -1794,7 +1850,7 @@ footer.footer p a {
     text-align: center;
   }
 
-  .titie-section h1 {
+  .title-section h1 {
     font-size: 26px;
   }
 
