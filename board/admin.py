@@ -10,7 +10,7 @@ class BoardAdmin(admin.ModelAdmin):
     list_display = ('title', 'writer', 'created_at', 'updated_at', 'image_path', 'hit')
 
 class UserCarAdmin(admin.ModelAdmin):
-    list_display = ('member', 'type', 'brand', 'img_path', 'saved_at')
+    list_display = ('member', 'img_type', 'img_brand', 'img_path', 'saved_at')
 
 admin.site.register(Member, MemberAdmin)
 admin.site.register(Board, BoardAdmin)
