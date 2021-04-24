@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="titie-section wow fadeInDown animated ">
+            <div class="title-section wow fadeInDown animated ">
                 <h1>게시글 수정</h1>
             </div>
         </div>
@@ -24,9 +24,9 @@
                         placeholder="게시글 내용">{{ form.contents.value }}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="id_image_path">유저 디자인</label>
-                    <img src="{{ form.image_path.value }}" id="id_image_path" name="image_path" class="img-responsive" width="512" height="512"
-                        alt="" />
+                    <label for="id_image_path">사용자 디자인</label>
+                    <img src="{{ form.image_path.value }}" id="id_image_path" name="image_path" class="img-responsive"
+                        width="512" height="512" alt="" />
                 </div>
                 <button type="submit" class="btn btn-primary">수정하기</button>
             </form>
