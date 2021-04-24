@@ -1,36 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="title-section wow fadeInDown animated ">
-                <h1>게시글 수정</h1>
+<section class="board-update">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title-section wow fadeInDown animated ">
+                    <h1>게시글 수정</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="form-group">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="id_title">게시글 제목</label>
+                        <input type="text" class="form-control" id="id_title" placeholder="게시글 제목" name="title"
+                               value="{{ form.title.value }}" />
+                        <label>게시글 내용</label>
+                        <textarea class="form-control" name="contents"
+                                  placeholder="게시글 내용" rows="20">{{ form.contents.value }}</textarea>
+                        <label for="id_image_path">저장된 디자인</label>
+                        <img src="{{ form.image_path.value }}" id="id_image_path" name="image_path" class="img-responsive"
+                             width="512" height="512" alt="" />
+                        <div class="update-button">
+                            <button type="submit" class="btn btn-primary">수정하기</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='../list/'">돌아가기</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-12">
-            <form method="POST" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="id_title">게시글 제목</label>
-                    <input type="text" class="form-control" id="id_title" placeholder="게시글 제목" name="title"
-                        value="{{ form.title.value }}" />
-                </div>
-                <div class="form-group">
-                    <label for="id_contents">게시글 내용</label>
-                    <textarea class="form-control" name="contents"
-                        placeholder="게시글 내용">{{ form.contents.value }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="id_image_path">사용자 디자인</label>
-                    <img src="{{ form.image_path.value }}" id="id_image_path" name="image_path" class="img-responsive"
-                        width="512" height="512" alt="" />
-                </div>
-                <button type="submit" class="btn btn-primary">수정하기</button>
-            </form>
-        </div>
-    </div>
-</div>
+</section>
 {% endblock %}
