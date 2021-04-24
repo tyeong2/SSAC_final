@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load social_share %}
 
 {% block content %}
 <section class="board-detail">
@@ -10,6 +11,8 @@
                 </div>
                 <div class="title-date">
                     <span>{{ board.updated_at }}</span>
+                    <br>
+                    <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
                 </div>
             </div>
         </div>
