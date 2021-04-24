@@ -56,9 +56,13 @@
             <span>{{board.voter.count}}</span>
             <a href="{% url 'vote_board' board.id  %}"><i class="pe-7s-like"></i></a>
           </div>
+          <div class="product-hit">
+            <img src="/static/img/eye_white.png" >
+            <span>{{ board.hit }}</span>
+          </div>
           <div class="product-title">
             <a href="/board/detail/{{ board.id }}/">
-              <span>{{ board.count }}</span>
+              <span>{{ board.id }}</span>
               <h3>{{ board.title }}</h3>
             </a>
           </div>
