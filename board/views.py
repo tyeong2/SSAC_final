@@ -245,8 +245,8 @@ def board_write(request):
             # 저장된 모델 검색
             usercar = UserCar.objects.get(img_path=image_path)
             board.image_path = usercar.img_path
-            board.image_type = usercar.type
-            board.image_brand = usercar.brand
+            board.image_type = usercar.img_type
+            board.image_brand = usercar.img_brand
 
             board.writer = member
             board.save()
