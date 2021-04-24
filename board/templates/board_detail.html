@@ -29,8 +29,8 @@
             <div class="row">
                 <article>
                     <div class="mid-area">
-                        {% if board.image %}
-                        <img src="{{ board.image.url }}" alt="{{ board.image }}" onerror="this.style.display='none';">
+                        {% if board.image_path %}
+                        <img src="{{ board.image_path }}" alt="{{ board.image_path }}" onerror="this.style.display='none';">
                         {% endif %}
                         <div class="mid-area-contents">{{ board.contents }}</div>
                     </div>
