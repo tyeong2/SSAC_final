@@ -16,11 +16,12 @@
         <div class="row">
             <div class="top-area">
                 <div class="side-le">
-                    <span>작성자</span>
+                    <span>작성자 :  </span>
+                    <b>{{board.writer.user_nickname}}</b>
                 </div>
                 <div class="side-ri">
-                    <span>조회 수 <b> 122 </b></span>
-                    <span>댓글 <b> 2 </b></span>
+                    <span>조회 수 <b> {{board.hit}} </b></span>
+                    <span>댓글 <b> {{board.comment_set.count}} </b></span>
                 </div>
             </div>
         </div>
@@ -67,7 +68,7 @@
                     <div class="comment py-2 text-muted">
                         <span style="white-space: pre-line;">{{ comment.content }}</span>
                         <span>
-                            - {{ comment.author }}, {{ comment.create_date }}
+                            - {{ comment.author.user_nickname }}, {{ comment.create_date }}
                             {% if comment.modify_date %}
                             (수정:{{ comment.modify_date }})
                             {% endif %}
