@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="news-letter-section">
+<section class="login-section">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <div class="titie-section wow fadeInDown animated ">
+        <div class="title-section wow fadeInDown animated ">
           <h1>Login</h1>
         </div>
         <div class="col-sm-12">
@@ -14,25 +14,26 @@
       </div>
     </div>
     <div class="row">
-      <div class="row subscribe-from">
+      <div class="login-from">
         <form method="POST" action=""
-          class="form-inline col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1  wow fadeInDown animated">
+              class="form-inline wow fadeInDown animated">
           {% csrf_token %}
           {% for field in form %}
           <div class="form-group">
             <input placeholder="{{ field.label }}" class="form-control" id="{{ field.id_for_label }}"
-              type="{{ field.field.widget.input_type }}" name="{{ field.name }}"></input>
+                   type="{{ field.field.widget.input_type }}" name="{{ field.name }}"></input>
           </div>
           {% if field.errors %}
           <span style="color: red;">{{ field.errors }}</span>
           {% endif %}
           {% endfor %}
-          <div class="login-button-wrap">
+          <div class="login-button">
             <button type="login" class="btn btn-primary">Sign in</button>
             <button type="button" class="btn btn-primary" onclick="location.href='/board/register/'">Sing up</button>
           </div>
         </form>
       </div>
     </div>
+  </div>
 </section>
 {% endblock %}
