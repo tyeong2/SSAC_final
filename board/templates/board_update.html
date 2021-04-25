@@ -22,10 +22,10 @@
                         <textarea class="form-control" name="contents"
                                   placeholder="게시글 내용" rows="20">{{ form.contents.value }}</textarea>
                         <label for="id_image_path">저장된 디자인</label>
-                        <img src="{{ form.image_path.value }}" id="id_image_path" name="image_path" class="img-responsive"
+                        <img src="{{ image.value }}" id="id_image_path" name="image_path" class="img-responsive"
                              width="512" height="512" alt="" />
                         <div class="update-button">
-                            <button type="submit" class="btn btn-primary" onclick="location.href='/board/detail{{ board.id }}/update/'">수정하기</button>
+                            <button type="submit" class="btn btn-primary">수정하기</button>
                             <button type="button" class="btn btn-primary" onclick="location.href='..'">돌아가기</button>
                         </div>
                     </form>
