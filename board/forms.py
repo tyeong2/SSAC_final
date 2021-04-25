@@ -47,7 +47,7 @@ class BoardForm(forms.Form):
 class BoardUpdate(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['title', 'contents', 'image_path']
+        fields = ['title', 'contents']
         
 class MemberUpdate(forms.ModelForm):
     class Meta:
