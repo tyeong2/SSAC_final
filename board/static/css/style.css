@@ -1560,12 +1560,6 @@ a.carousel-control.right>span {
   width: 100%;
 }
 
-.board-list .search .feedback {
-  display: block;
-  margin-top: 25px;
-  text-align: center;
-}
-
 .board-list .page {
   padding: 60px 0 60px;
   display: block;
@@ -1574,15 +1568,11 @@ a.carousel-control.right>span {
 
 .board-list .page {
   display: block;
-  margin-top: 50px;
+  margin: 0px;
 }
 
-.board-list .page .page-button{
+.board-list .page .page-button {
   text-align: center;
-}
-
-.board-list .page .page-button button{
-  margin: 30px;
 }
 
 /*
