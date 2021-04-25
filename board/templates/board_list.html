@@ -19,6 +19,25 @@
             <li class="button" data-category="Sedan">Sedan</li>
             <li class="button" data-category="SportsCar">Sports car</li>
             <li class="button" data-category="SUV">SUV</li>
+            {% if request.session.user %}
+            <li class="button" data-category="{{ request.session.user }}">내가 쓴 글</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="filter-bar">
+          <ul class="nav navbar-nav navbar-right cart-menu">
+            <li class="dropdown">
+              <button type="submit" class="btn btn-default dropdown toggle" data-toggle="dropdown"
+                onchange="location = this.value;">
+                ---<span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a name="latest" href="?sort=latest">최신순</a></li>
+                <li><a name="likes" href="?sort=likes">좋아요순</a></li>
+                <li><a name="hits" href="?sort=hits">조회수순</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -27,7 +46,7 @@
     <div class="row featured isotope">
       <!-- isotope은 이미지가 겹치는것을 방지하는 기능이다 -->
       {% for board in boards %}
-      <div class="col-md-3 col-sm-6 col-xs-12 {{ board.image_type }} featured-items isotope-item">
+      <div class="col-md-3 col-sm-6 col-xs-12 {{ board.image_type }} {{ board.writer_id }} featured-items isotope-item">
         <div class="product-item">
           <img src="{{ board.image_path }}" class="img-responsive" width="512" height="512" alt="">
           <div class="product-like">
@@ -35,7 +54,7 @@
             <a href="{% url 'vote_board' board.id  %}"><i class="pe-7s-like"></i></a>
           </div>
           <div class="product-hit">
-            <img src="/static/img/eye_white.png" >
+            <img src="/static/img/eye_white.png">
             <span>{{ board.hit }}</span>
           </div>
           <div class="product-title">
@@ -46,7 +65,9 @@
           </div>
         </div>
         {% for message in messages %}
-        <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+        <div
+          class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center"
+          role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -57,26 +78,28 @@
       {% endfor %}
     </div>
 
+    <br><br>
     <div class="search">
-      <div class="row">
-        <div class="col-xs-2 col-sm2">
-          <select name="searchType" class="form-control">
-            <option value="n">-----</option>
-            <option value="t">제목</option>
-            <option value="c">내용</option>
-            <option value="w">작성자</option>
-            <option value="tc">제목+내용</option>
-          </select>
-        </div>
-        <div class="col-xs-10 col-sm-10">
-          <div class="input-group">
-            <input type="text" name="keyword" id="keywordInput" value="" class=" form-control">
-            <span class="input-group-btn">
-              <button id="searchBtn" class="btn btn-default">검색</button>
-            </span>
+      <form action="" method="GET">
+        <div class="row">
+          <div class="col-xs-2 col-sm2">
+            <select name="searchType" class="form-control">
+              <option value="t">제목</option>
+              <option value="c">내용</option>
+              <option value="w">작성자</option>
+            </select>
+          </div>
+
+          <div class="col-xs-10 col-sm-10">
+            <div class="input-group">
+              <input type="text" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요" class="form-control">
+              <span class="input-group-btn">
+                <button type="submit" id="searchBtn" class="btn btn-default">검색</button>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
 
       <div class="page">
         <div class="row mt-2">
@@ -113,8 +136,8 @@
           <button type="button" class="btn btn-primary" onclick="location.href='/board/write/'">글쓰기</button>
         </div>
       </div>
+
     </div>
   </div>
 </section>
-
 {% endblock %}
