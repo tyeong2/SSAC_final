@@ -653,6 +653,42 @@ a.carousel-control.right>span {
 }
 
 /*
+    PAGE-UPDATE SECTION
+ */
+.page-update {
+  padding: 60px 0 60px;
+  display: block;
+  width: 100%;
+}
+
+.page-update {
+  display: block;
+  margin-top: 50px;
+}
+
+.page-update .form-group{
+  width: 100%;
+  display: block;
+}
+
+.page-update .error{
+  font-size: 20px;
+  font-weight: 800;
+  font-family: 'Serif';
+  color: #FF0000;
+  text-align: center;
+}
+
+.page-update .page-button{
+  text-align: center;
+}
+
+.page-update .page-button button{
+  margin: 30px;
+  margin-bottom: 0px;
+}
+
+/*
     ABOUT SECTION
  */
 .about-section {
