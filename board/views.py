@@ -286,7 +286,7 @@ def board_update(request, pk):
     else:
         if request.method == 'GET':
             form = BoardUpdate(instance=board)
-            return render(request, 'board_update.html', {'form':form})
+            return render(request, 'board_update.html', {'form':form, 'image':board.image_path})
 
         elif request.method == 'POST':
             form = BoardUpdate(request.POST, request.FILES)
