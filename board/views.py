@@ -223,7 +223,26 @@ def logout(request):
 
 
 def board_list(request):
-    all_boards = Board.objects.all().order_by('-id')
+    sort = request.GET.get('sort')
+    kwd = request.GET.get('keyword')
+    print(request.GET)
+    if sort: # 정렬하기 기능
+        if sort == 'likes': # 좋아요 순
+            all_boards = Board.objects.annotate().order_by('-voter', '-created_at')
+        elif sort == 'hits': # 조회수 순
+            all_boards = Board.objects.filter().order_by('-hit', '-created_at')
+        elif sort == 'latest': # 그냥 최신순
+            all_boards = Board.objects.all().order_by('-created_at')
+    elif kwd: # 검색 기능
+        stype = request.GET.get('searchType')
+        if stype == 't': # 제목 검색
+            all_boards = Board.objects.filter(title__contains=kwd).order_by('-created_at')
+        elif stype == 'c': # 내용 검색
+            all_boards = Board.objects.filter(contents__contains=kwd).order_by('-created_at')
+        else: # 작성자 검색
+            all_boards = Board.objects.filter(writer__user_nickname__contains=kwd).order_by('-created_at')
+    else: # 그냥 페이지 불러오기 기본값
+        all_boards = Board.objects.all().order_by('-id')
     page = int(request.GET.get('p', 1))
     #페이지 명을 'p'라는 변수로 받고 없다면 1페이지로
     pagenator = Paginator(all_boards, 8) #all_boards 의 내용을 한 페이지당 오브젝트 8개씩
