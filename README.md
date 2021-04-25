@@ -12,9 +12,9 @@ $ python manage.py runserver
 (AWS에서는)  
 $ sh run.sh  
 
-# makemigrations 하기 전 확인사항
-community/settings.py >>> SECRET KEY 입력  
-board/views.py >>> mongodb IP 확인 or 변경
+# makemigrations 하기 전 확인사항 
+board/views.py >>> mongodb IP 확인 or 변경  
+community/settings.py >>> 사용 데이터 베이스 확인
 
 
 
