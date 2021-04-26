@@ -59,7 +59,11 @@ def mypage(request):
         return redirect('/board/login/')
     else:
         member = Member.objects.get(id=user_id)
-        return render(request, 'mypage.html', {'member':member})
+        all_imgs = member.usercar_set.all().order_by('-id')
+        page = int(request.GET.get('p',1))
+        paginator = Paginator(all_imgs, 4)
+        images = paginator.get_page(page)
+        return render(request, 'mypage.html', {'member':member, 'images':images})
 
 def mypage_update(request):
     user_id = request.session.get('user')
@@ -224,6 +228,7 @@ def logout(request):
 
 def board_list(request):
     sort = request.GET.get('sort')
+    cat = request.GET.get('cat')
     kwd = request.GET.get('keyword')
     print(request.GET)
     if sort: # 정렬하기 기능
@@ -241,14 +246,25 @@ def board_list(request):
             all_boards = Board.objects.filter(contents__contains=kwd).order_by('-created_at')
         else: # 작성자 검색
             all_boards = Board.objects.filter(writer__user_nickname__contains=kwd).order_by('-created_at')
+            # __contains 붙이면 '~ 포함하는~' 의미, writer__user_nickname 하면 writer가 ForeignKey로 가지고 있는 Member의 user_nickname에 접근한다
+    elif cat: # 차종 필터 기능
+        if cat == 'hatchback':
+            all_boards = Board.objects.filter(image_type='Hatchback').order_by('-created_at')
+        elif cat == 'sedan':
+            all_boards = Board.objects.filter(image_type='Sedan').order_by('-created_at')
+        elif cat == 'sportscar':
+            all_boards = Board.objects.filter(image_type='SportsCar').order_by('-created_at')
+        elif cat == 'suv':
+            all_boards = Board.objects.filter(image_type='SUV').order_by('-created_at')
+        elif cat == 'mypost':
+            all_boards = Board.objects.filter(writer=request.session.get('user')).order_by('-created_at')
     else: # 그냥 페이지 불러오기 기본값
         all_boards = Board.objects.all().order_by('-id')
     page = int(request.GET.get('p', 1))
     #페이지 명을 'p'라는 변수로 받고 없다면 1페이지로
-    pagenator = Paginator(all_boards, 8) #all_boards 의 내용을 한 페이지당 오브젝트 8개씩
-    boards = pagenator.get_page(page)
+    paginator = Paginator(all_boards, 8) #all_boards 의 내용을 한 페이지당 오브젝트 8개씩
+    boards = paginator.get_page(page)
     return render(request, 'board_list.html', {'boards' : boards})
-
 
 def board_write(request):
     #로그인 하지 않은 접속자인지 확인
