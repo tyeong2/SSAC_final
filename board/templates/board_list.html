@@ -14,13 +14,13 @@
       <div class="col-md-9">
         <div class="filter-menu">
           <ul class="button-group sort-button-group">
-            <li class="button active" data-category="all">All</li>
-            <li class="button" data-category="Hatchback">Hatchback</li>
-            <li class="button" data-category="Sedan">Sedan</li>
-            <li class="button" data-category="SportsCar">Sports car</li>
-            <li class="button" data-category="SUV">SUV</li>
+            <li class="button {% if request.GET.cat == None %}active{% endif %}" onclick="location.href='/board/list/'" data-category="all">All</li>
+            <li class="button {% if request.GET.cat == 'hatchback' %}active{% endif %}" onclick="location.href='?cat=hatchback'" data-category="Hatchback">Hatchback</li>
+            <li class="button {% if request.GET.cat == 'sedan' %}active{% endif %}" onclick="location.href='?cat=sedan'" data-category="Sedan">Sedan</li>
+            <li class="button {% if request.GET.cat == 'sportscar' %}active{% endif %}" onclick="location.href='?cat=sportscar'" data-category="SportsCar">Sports car</li>
+            <li class="button {% if request.GET.cat == 'suv' %}active{% endif %}" onclick="location.href='?cat=suv'" data-category="SUV">SUV</li>
             {% if request.session.user %}
-            <li class="button" data-category="{{ request.session.user }}">내가 쓴 글</li>
+            <li class="button {% if request.GET.cat == 'mypost' %}active{% endif %}" onclick="location.href='?cat=mypost'" data-category="{{ request.session.user }}">내가 쓴 글</li>
             {% endif %}
           </ul>
         </div>
