@@ -39,6 +39,19 @@
                 </div>
                 {% endfor %}
             </div>
+            
+            {%if images.has_next%}
+            <a href="?p={{images.next_page_number}}"><button type="button"
+                class="btn btn-dark">다음</button></a>&nbsp&nbsp&nbsp
+            {%endif%}
+            <span>{{images.number}}</span>&nbsp
+            <span> of </span>&nbsp
+            <span>{{images.paginator.num_pages}}</span>&nbsp&nbsp
+            {%if images.has_previous%}
+            <a href="?p={{images.previous_page_number}}"><button type="button"
+                class="btn btn-dark">이전</button></a>&nbsp&nbsp&nbsp
+            {%endif%}
+            
             {% endif %}
         </div>
     </div>
