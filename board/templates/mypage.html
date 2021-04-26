@@ -24,34 +24,34 @@
                     <!-- 유저 저장 이미지 영역 -->
                 </div>
                 <div class="page-button">
-                    <button type="button" class="btn btn-primary" onclick="location.href='/board/mypage/update/'">정보 수정</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/board/mypage/update/'">정보
+                        수정</button>
                 </div>
             </div>
         </div>
+
         {% if member.usercar_set.count > 0 %}
         <div class="page-bottom">
             <h2>저장사진</h2>
             <div class="row featured isotope">
                 <span>{{member.usercar.img_path}}</span>
-                {% for usercar in member.usercar_set.all %}
-                <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
-                    <img src= {{usercar.img_path}}  class="img-responsive" width="512" height="512" alt="">
+                {% for image in images %}
+                <div class="col-md-3 col-sm-6 col-xs-12 featured-items isotope-item">
+                    <img src={{image.img_path}} class="img-responsive" width="512" height="512" alt="">
                 </div>
                 {% endfor %}
             </div>
-            
+
             {%if images.has_next%}
-            <a href="?p={{images.next_page_number}}"><button type="button"
-                class="btn btn-dark">다음</button></a>&nbsp&nbsp&nbsp
+            <a href="?p={{images.next_page_number}}">다음</a>&nbsp&nbsp&nbsp
             {%endif%}
             <span>{{images.number}}</span>&nbsp
             <span> of </span>&nbsp
             <span>{{images.paginator.num_pages}}</span>&nbsp&nbsp
             {%if images.has_previous%}
-            <a href="?p={{images.previous_page_number}}"><button type="button"
-                class="btn btn-dark">이전</button></a>&nbsp&nbsp&nbsp
+            <a href="?p={{images.previous_page_number}}">이전</a>&nbsp&nbsp&nbsp
             {%endif%}
-            
+
             {% endif %}
         </div>
     </div>
