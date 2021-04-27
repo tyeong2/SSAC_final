@@ -6,8 +6,12 @@ SSAC mini project final
 $ git clone https://github.com/tyeong2/SSAC_final.git  
 $ cd SSAC_final  
 $ pip install -r requirements.txt  
-$ python manage.py makemigrations  
+$ python manage.py makemigrations
+>> sqlite3 DATABASE 사용할 경우
 $ python manage.py migrate  
+>> mongoDB 사용하려는 경우
+$ python manage.py migrate --database=mongodb  
+
 $ python manage.py runserver  
 (AWS에서는)  
 $ sh run.sh  
