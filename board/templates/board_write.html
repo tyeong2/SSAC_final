@@ -32,6 +32,9 @@
                         {% endif %}
                         {% endfor %}
                         <br />
+                        {% if error %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endif %}
                         <div class="row">
                             <div class="save-design">
                                 {% if member.usercar_set.count > 0 %}
