@@ -32,9 +32,10 @@
             <div class="row">
                 <article>
                     <div class="mid-area">
-                        {% if board.image_path %}
                         <img src="{{ board.image_path }}" alt="{{ board.image_path }}" onerror="this.style.display='none';">
-                        {% endif %}
+                        <div class="text-right">
+                            <span>차종 : {{ board.image_type }}, 브랜드 : {{ board.image_brand }}</span>
+                        </div>
                         <div class="mid-area-contents">{{ board.contents }}</div>
                     </div>
                 </article>
