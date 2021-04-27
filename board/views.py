@@ -278,12 +278,15 @@ def board_write(request):
         form = BoardForm(request.POST)
         if form.is_valid():
             # 검증 성공 시 cleaned_data 제공
-            # 실패시 form.error에 오류 저장
+            # 실패시 form.errors에 오류 저장
             board = Board()
             board.title = form.cleaned_data['title']
             board.contents = form.cleaned_data['contents']
             image_path = request.POST.get('img_path')
-            # 저장된 모델 검색
+            if not image_path:
+                form = BoardForm()
+                context = {'error':'사진을 선택해주세요', 'form':form, 'member':member}
+                return render(request, 'board_write.html', context)
             usercar = UserCar.objects.get(img_path=image_path)
             board.image_path = usercar.img_path
             board.image_type = usercar.img_type
@@ -293,11 +296,8 @@ def board_write(request):
             board.save()
             return redirect('/board/list/')
     else:
-        context = {}
         form = BoardForm()
-        context['form'] = form
-        context['member'] = member
-    return render(request, 'board_write.html', context)
+    return render(request, 'board_write.html', {'form':form, 'member':member})
 
 
 def board_detail(request, pk):
