@@ -75,30 +75,26 @@ WSGI_APPLICATION = 'community.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASE = 'sqlite3'
 
-if DATABASE == 'sqlite3':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'mongodb': {
+        'ENGINE': 'djongo',
+        'NAME': 'userdb',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': '127.0.0.1',
+            'port': 27017,
+            'username': 'opadak',
+            'password': '1q2w3e',
+            'authSource': 'admin',
+            'authMechanism': 'SCRAM-SHA-1'
         }
     }
-elif DATABASE == 'mongodb':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'userdb',
-            'CLIENT': {
-                'host': '127.0.0.1',
-                'port': 27017,
-                'username': 'opadak',
-                'password': '1q2w3e',
-                'authSource': 'admin',
-                'authMechanism': 'SCRAM-SHA-1'
-            }
-        }
-    }
+}
 
 
 # Password validation
